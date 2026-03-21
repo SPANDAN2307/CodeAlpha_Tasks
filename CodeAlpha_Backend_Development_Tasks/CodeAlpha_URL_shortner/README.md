@@ -160,4 +160,4 @@ GET http://localhost:3000/aB3x9Y
 6. The application will compute the route and display a freshly generated, clickable, shortened URL string immediately beneath the button. Make sure to click the new short URL to test out the seamless database redirection!
 
 ---
-*Developed for CodeAlpha Internship Tasks*
+
