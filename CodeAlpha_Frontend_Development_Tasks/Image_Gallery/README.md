@@ -40,9 +40,9 @@ Because this project is built entirely on client-side web technologies, there ar
 ### Method 2: Clone via Git
 If you have Git installed, you can clone this repository to your computer by running the following command in your terminal:
 ```bash
-git clone https://github.com/your-username/Image_Gallery.git
+git clone https://github.com/SPANDAN2307/CodeAlpha_Tasks.git
 ```
-Then, navigate into the project folder (`cd Image_Gallery`) and open the `index.html` file in any modern web browser.
+Then, navigate into the project folder (`cd CodeAlpha_Tasks/CodeAlpha_Frontend_Development_Tasks/Image_Gallery`) and open the `index.html` file in any modern web browser.
 
 ## 🖼️ Uploading Images
 
