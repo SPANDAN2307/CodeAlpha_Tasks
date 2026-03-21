@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>Lumina Gallery</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Google Fonts for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <h1>Image Gallery</h1>
-        <p>Explore our beautiful collections</p>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-camera-retro"></i>
+            <span>Lumina Gallery</span>
+        </div>
+        <div class="nav-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search by title...">
+        </div>
+        <div class="nav-controls">
+            <button id="themeToggle" class="icon-btn" title="Toggle Dark Mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Discover Perspectives</h1>
+        <p>A curated mason grid collection of visually stunning photography</p>
     </header>
 
     <main>
-        <!-- Filter Buttons -->
+        <!-- Categories -->
         <div class="filter-container">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="nature">Nature</button>
@@ -29,56 +44,108 @@
             <button class="filter-btn" data-filter="abstract">Abstract</button>
         </div>
 
-        <!-- Image Upload Section -->
-        <div class="upload-container">
-            <h3 class="upload-title"><i class="fas fa-cloud-upload-alt"></i> Add New Image</h3>
-            <form id="uploadForm" class="upload-form">
-                <div class="form-group">
-                    <label for="imageUpload" class="file-label">
-                        <i class="fas fa-image"></i> Choose Image
-                        <input type="file" id="imageUpload" accept="image/*" required>
-                    </label>
-                    <span id="fileName" class="file-name">No file chosen</span>
-                </div>
-                <div class="form-group">
-                    <select id="imageCategory" required class="custom-select">
-                        <option value="" disabled selected>Select Category</option>
-                        <option value="nature">Nature</option>
-                        <option value="architecture">Architecture</option>
-                        <option value="animals">Animals</option>
-                        <option value="people">People</option>
-                        <option value="travel">Travel</option>
-                        <option value="abstract">Abstract</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <select id="imageFilter" class="custom-select">
-                        <option value="none">No Filter</option>
-                        <option value="grayscale">Grayscale</option>
-                        <option value="sepia">Sepia</option>
-                        <option value="blur">Blur</option>
-                        <option value="brightness">Brightness</option>
-                        <option value="contrast">Contrast</option>
-                        <option value="hue-rotate">Hue Rotate</option>
-                    </select>
-                </div>
-                <button type="submit" class="submit-btn"><i class="fas fa-plus"></i> Add to Gallery</button>
-            </form>
+        <!-- Preloader / Skeleton -->
+        <div id="loader" class="loader-container">
+            <div class="spinner"></div>
+            <p>Loading inspiration...</p>
         </div>
 
-        <!-- Gallery Grid -->
-        <div class="gallery-grid" id="gallery">
-            <!-- Images will be inserted here via JavaScript -->
+        <!-- Gallery Grid (Masonry) -->
+        <div class="gallery-grid" id="gallery" style="display: none;">
+            <!-- Images inserted via JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="far fa-images fa-4x"></i>
+            <h2>No images found</h2>
+            <p>Try adjusting your search or filters to find what you're looking for.</p>
         </div>
     </main>
 
-    <!-- Lightbox Modal -->
+    <!-- Floating Action Button -->
+    <button class="fab" id="openUploadBtn" title="Upload New Image">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeUploadBtn"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title"><i class="fas fa-cloud-upload-alt"></i> Publish to Lumina</h3>
+            
+            <form id="uploadForm" class="upload-form">
+                <div class="form-group full-width">
+                    <label for="imageTitle">Image Title</label>
+                    <input type="text" id="imageTitle" class="custom-input" placeholder="e.g. Sunset at the Bay" required>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="imageUpload" class="dropzone" id="dropzoneLabel">
+                        <i class="fas fa-image fa-3x"></i>
+                        <span id="dropzoneText">Click to browse or drag image here</span>
+                        <input type="file" id="imageUpload" accept="image/*" required>
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label>Category</label>
+                        <select id="imageCategory" required class="custom-input">
+                            <option value="nature">Nature</option>
+                            <option value="architecture">Architecture</option>
+                            <option value="animals">Animals</option>
+                            <option value="people">People</option>
+                            <option value="travel">Travel</option>
+                            <option value="abstract">Abstract</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group half-width">
+                        <label>Creative Filter</label>
+                        <select id="imageFilter" class="custom-input">
+                            <option value="none">Normal</option>
+                            <option value="grayscale">Noir</option>
+                            <option value="sepia">Vintage</option>
+                            <option value="blur">Dreamy</option>
+                            <option value="brightness">Vivid</option>
+                            <option value="contrast">Dramatic</option>
+                            <option value="hue-rotate">Psychedelic</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn full-width">
+                    <i class="fas fa-paper-plane"></i> Publish Image
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Advanced Lightbox Modals -->
     <div class="lightbox" id="lightbox">
-        <span class="close-btn" id="closeLightbox">&times;</span>
+        <div class="lightbox-toolbar">
+            <div class="lightbox-title" id="lightboxTitle">Image Title</div>
+            <div class="lightbox-actions">
+                <span class="lightbox-category" id="lightboxCatBadge">Category</span>
+                <a href="#" id="downloadBtn" download="image.jpg" class="toolbar-btn" title="Download">
+                    <i class="fas fa-download"></i>
+                </a>
+                <button class="toolbar-btn close-btn" id="closeLightbox" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
         <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-        <img class="lightbox-img" id="lightboxImg" src="" alt="Lightbox View">
+        
+        <div class="lightbox-body">
+            <div class="img-wrapper">
+                <img class="lightbox-img" id="lightboxImg" src="" alt="Lightbox View">
+            </div>
+        </div>
+        
         <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
-        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
     <script src="script.js"></script>

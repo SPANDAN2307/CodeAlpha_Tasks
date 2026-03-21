@@ -1,221 +1,282 @@
+// ==========================================================================
+// Initial Image Data
+// ==========================================================================
 let images = [
-    { id: 1, src: "https://picsum.photos/id/1015/800/600", category: "nature", title: "Misty Mountains", filterClass: "css-filter-none" },
-    { id: 2, src: "https://picsum.photos/id/1040/800/600", category: "architecture", title: "Modern Castle", filterClass: "css-filter-none" },
-    { id: 3, src: "https://picsum.photos/id/1020/800/600", category: "animals", title: "Bear", filterClass: "css-filter-none" },
-    { id: 4, src: "https://picsum.photos/id/1018/800/600", category: "nature", title: "Mountain Peak", filterClass: "css-filter-none" },
-    { id: 5, src: "https://picsum.photos/id/1043/800/600", category: "architecture", title: "City Life", filterClass: "css-filter-none" },
-    { id: 6, src: "https://picsum.photos/id/1024/800/600", category: "animals", title: "Eagle", filterClass: "css-filter-none" },
-    { id: 7, src: "https://picsum.photos/id/1019/800/600", category: "nature", title: "Coastal View", filterClass: "css-filter-none" },
-    { id: 8, src: "https://picsum.photos/id/1044/800/600", category: "architecture", title: "Urban Structures", filterClass: "css-filter-none" },
-    { id: 9, src: "https://picsum.photos/id/1025/800/600", category: "animals", title: "Pug", filterClass: "css-filter-none" },
-    { id: 10, src: "https://picsum.photos/id/1027/800/600", category: "people", title: "Portrait", filterClass: "css-filter-none" },
-    { id: 11, src: "https://picsum.photos/seed/travel/800/600", category: "travel", title: "Adventure", filterClass: "css-filter-none" },
-    { id: 12, src: "https://picsum.photos/seed/abstract/800/600", category: "abstract", title: "Abstract Art", filterClass: "css-filter-none" }
+    { id: 1, src: "https://images.unsplash.com/photo-1470071373511-b01633a60a4f?w=800&auto=format&fit=crop", category: "nature", title: "Misty Mountains", filterClass: "none" },
+    { id: 2, src: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&auto=format&fit=crop", category: "architecture", title: "Modern Castle", filterClass: "none" },
+    { id: 3, src: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&auto=format&fit=crop", category: "animals", title: "Red Fox", filterClass: "none" },
+    { id: 4, src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=900&auto=format&fit=crop", category: "nature", title: "Mountain Peak", filterClass: "none" },
+    { id: 5, src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=750&auto=format&fit=crop", category: "architecture", title: "City Life", filterClass: "none" },
+    { id: 6, src: "https://images.unsplash.com/photo-1543946207-39fdc0406592?w=800&auto=format&fit=crop", category: "animals", title: "Eagle", filterClass: "none" },
+    { id: 7, src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=1200&auto=format&fit=crop", category: "nature", title: "Coastal View", filterClass: "none" },
+    { id: 8, src: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&h=800&auto=format&fit=crop", category: "architecture", title: "Urban Structures", filterClass: "none" },
+    { id: 9, src: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&auto=format&fit=crop", category: "animals", title: "Lion Portrait", filterClass: "none" },
+    { id: 10, src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&h=700&auto=format&fit=crop", category: "people", title: "Portrait in Light", filterClass: "none" },
+    { id: 11, src: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800&auto=format&fit=crop", category: "travel", title: "Quiet Beach", filterClass: "none" },
+    { id: 12, src: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&h=600&auto=format&fit=crop", category: "abstract", title: "Neon Flow", filterClass: "none" }
 ];
 
+// ==========================================================================
 // DOM Elements
+// ==========================================================================
 const galleryContainer = document.getElementById('gallery');
 const filterBtns = document.querySelectorAll('.filter-btn');
+const loader = document.getElementById('loader');
+const emptyState = document.getElementById('emptyState');
+const searchInput = document.getElementById('searchInput');
+
+// Theme
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+
+// Lightbox
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxCatBadge = document.getElementById('lightboxCatBadge');
 const closeLightboxBtn = document.getElementById('closeLightbox');
 const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
+const downloadBtn = document.getElementById('downloadBtn');
 
-// Upload Form Elements
+// Upload Modal
+const openUploadBtn = document.getElementById('openUploadBtn');
+const uploadModal = document.getElementById('uploadModal');
+const closeUploadBtn = document.getElementById('closeUploadBtn');
 const uploadForm = document.getElementById('uploadForm');
 const imageUpload = document.getElementById('imageUpload');
-const fileNameDisplay = document.getElementById('fileName');
-const imageCategory = document.getElementById('imageCategory');
-const imageFilter = document.getElementById('imageFilter');
+const dropzoneLabel = document.getElementById('dropzoneLabel');
+const dropzoneText = document.getElementById('dropzoneText');
 
 let currentDisplayedImages = [];
 let currentImageIndex = 0;
+let currentFilter = 'all';
 
-// Initialize Gallery
-function initGallery() {
+// ==========================================================================
+// Initialization
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     renderImages('all');
     setupEventListeners();
+});
+
+// ==========================================================================
+// Theme Management (Dark/Light Mode)
+// ==========================================================================
+function initTheme() {
+    const savedTheme = localStorage.getItem('lumina-theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('lumina-theme', isDark ? 'dark' : 'light');
+    });
 }
 
-// Render Images Based on Filter
-function renderImages(filter) {
-    // Fade out
-    galleryContainer.classList.add('fade-out');
+// ==========================================================================
+// Gallery Rendering & Search
+// ==========================================================================
+function renderImages(categoryFilter = currentFilter, searchQuery = searchInput.value.toLowerCase()) {
+    currentFilter = categoryFilter;
+    
+    // Show Loader
+    galleryContainer.style.display = 'none';
+    emptyState.style.display = 'none';
+    loader.style.display = 'block';
     
     setTimeout(() => {
         galleryContainer.innerHTML = '';
         
-        currentDisplayedImages = filter === 'all' 
-            ? images 
-            : images.filter(img => img.category === filter);
+        // Filter logic
+        currentDisplayedImages = images.filter(img => {
+            const matchesCategory = categoryFilter === 'all' || img.category === categoryFilter;
+            const matchesSearch = img.title.toLowerCase().includes(searchQuery);
+            return matchesCategory && matchesSearch;
+        });
         
+        if (currentDisplayedImages.length === 0) {
+            loader.style.display = 'none';
+            emptyState.style.display = 'block';
+            return;
+        }
+
         currentDisplayedImages.forEach((img, index) => {
             const item = document.createElement('div');
             item.className = 'gallery-item';
-            item.dataset.index = index;
             
-            const filterClass = img.filterClass || 'css-filter-none';
+            // Stagger animation delay
+            item.style.animationDelay = `${index * 0.05}s`;
+            
+            const filterClass = img.filterClass !== 'none' ? `css-filter-${img.filterClass}` : '';
             
             item.innerHTML = `
                 <img src="${img.src}" alt="${img.title}" loading="lazy" class="${filterClass}">
                 <div class="item-overlay">
-                    <span class="item-title">${img.title}</span>
-                    <span class="item-icon"><i class="fas fa-expand"></i></span>
+                    <div class="item-content">
+                        <span class="item-badge">${img.category}</span>
+                        <h3 class="item-title">${img.title}</h3>
+                    </div>
                 </div>
             `;
             
-            // Add click event to open lightbox
             item.addEventListener('click', () => openLightbox(index));
-            
             galleryContainer.appendChild(item);
         });
         
-        // Fade in
-        galleryContainer.classList.remove('fade-out');
-    }, 300); // match transition time
+        loader.style.display = 'none';
+        galleryContainer.style.display = 'block'; // Fallback to column/block for masonry
+    }, 400); // Simulate network load for visual polish
 }
 
-// Set up Event Listeners
+// ==========================================================================
+// Event Listeners
+// ==========================================================================
 function setupEventListeners() {
     // Filter Buttons
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Update active class
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
-            // Filter images
             renderImages(btn.dataset.filter);
         });
     });
     
-    // Lightbox Close
-    closeLightboxBtn.addEventListener('click', closeLightbox);
+    // Search Bar
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            renderImages(currentFilter);
+        }, 300); // debounce
+    });
     
-    // Lightbox Navigation
+    // Lightbox Controls
+    closeLightboxBtn.addEventListener('click', closeLightbox);
     prevBtn.addEventListener('click', navigatePrev);
     nextBtn.addEventListener('click', navigateNext);
     
-    // Keyboard Navigation
     document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') navigatePrev();
-        if (e.key === 'ArrowRight') navigateNext();
+        if (lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigatePrev();
+            if (e.key === 'ArrowRight') navigateNext();
+        }
+        if (uploadModal.classList.contains('active') && e.key === 'Escape') {
+            closeUploadModal();
+        }
     });
+
+    // Upload Modal Handling
+    openUploadBtn.addEventListener('click', () => uploadModal.classList.add('active'));
+    closeUploadBtn.addEventListener('click', closeUploadModal);
     
-    // Close on overlay click
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
+    // Drag & Drop
+    dropzoneLabel.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzoneLabel.classList.add('active');
+    });
+    dropzoneLabel.addEventListener('dragleave', () => dropzoneLabel.classList.remove('active'));
+    dropzoneLabel.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzoneLabel.classList.remove('active');
+        if (e.dataTransfer.files.length) {
+            imageUpload.files = e.dataTransfer.files;
+            handleFileSelect();
         }
     });
-
-    // Upload System
-    imageUpload.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            fileNameDisplay.textContent = e.target.files[0].name;
-        } else {
-            fileNameDisplay.textContent = 'No file chosen';
-        }
-    });
-
-    uploadForm.addEventListener('submit', handleImageUpload);
+    imageUpload.addEventListener('change', handleFileSelect);
+    uploadForm.addEventListener('submit', handleImageUploadSubmit);
 }
 
-// Handle Image Upload Submission
-function handleImageUpload(e) {
-    e.preventDefault();
-
-    const file = imageUpload.files[0];
-    if (!file) return;
-
-    // Create a local object URL for the uploaded image
-    const tempUrl = URL.createObjectURL(file);
-    const category = imageCategory.value;
-    const filterSelected = imageFilter.value;
-    const filterClass = `css-filter-${filterSelected}`;
-
-    // Create new image object
-    const newImage = {
-        id: images.length + 1,
-        src: tempUrl,
-        category: category,
-        title: "User Uploaded Image",
-        filterClass: filterClass
-    };
-
-    // Add to images array
-    images.unshift(newImage); // Add to the top of the gallery
-
-    // Reset Form
-    uploadForm.reset();
-    fileNameDisplay.textContent = 'No file chosen';
-
-    // Rerender specifically the 'all' filter, or the uploaded category
-    // Update active filter button
-    filterBtns.forEach(b => {
-        if (b.dataset.filter === 'all') {
-            b.classList.add('active');
-        } else {
-            b.classList.remove('active');
-        }
-    });
-    renderImages('all');
-}
-
-// Lightbox Functions
+// ==========================================================================
+// Lightbox Logic
+// ==========================================================================
 function openLightbox(index) {
     currentImageIndex = index;
     updateLightboxContent();
     lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
     lightbox.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling
+    body.style.overflow = '';
 }
 
 function updateLightboxContent() {
     const imgData = currentDisplayedImages[currentImageIndex];
+    const filterClass = imgData.filterClass !== 'none' ? `css-filter-${imgData.filterClass}` : '';
     
-    // Simple fade effect for image change
-    lightboxImg.style.opacity = '0';
+    lightboxImg.classList.remove('loaded');
     
+    // Reset image to trigger load event cleanly
     setTimeout(() => {
         lightboxImg.src = imgData.src;
         lightboxImg.alt = imgData.title;
-        // Apply corresponding filter to the lightbox image
-        lightboxImg.className = 'lightbox-img ' + (imgData.filterClass || 'css-filter-none');
-        lightboxCaption.textContent = imgData.title;
+        lightboxImg.className = `lightbox-img ${filterClass}`;
         
-        // Update nav buttons visibility based on position
+        lightboxTitle.textContent = imgData.title;
+        lightboxCatBadge.textContent = imgData.category;
+        downloadBtn.href = imgData.src;
+        downloadBtn.download = `${imgData.title.replace(/\s+/g, '-').toLowerCase()}.jpg`;
+        
         prevBtn.style.visibility = currentImageIndex === 0 ? 'hidden' : 'visible';
         nextBtn.style.visibility = currentImageIndex === currentDisplayedImages.length - 1 ? 'hidden' : 'visible';
         
-        lightboxImg.onload = () => {
-            lightboxImg.style.opacity = '1';
-        };
-    }, 200);
+        lightboxImg.onload = () => lightboxImg.classList.add('loaded');
+    }, 50);
 }
 
-function navigatePrev() {
-    if (currentImageIndex > 0) {
-        currentImageIndex--;
-        updateLightboxContent();
+function navigatePrev() { if (currentImageIndex > 0) { currentImageIndex--; updateLightboxContent(); } }
+function navigateNext() { if (currentImageIndex < currentDisplayedImages.length - 1) { currentImageIndex++; updateLightboxContent(); } }
+
+// ==========================================================================
+// Upload Logic
+// ==========================================================================
+function handleFileSelect() {
+    if (imageUpload.files.length > 0) {
+        dropzoneText.textContent = imageUpload.files[0].name;
+    } else {
+        dropzoneText.textContent = 'Click to browse or drag image here';
     }
 }
 
-function navigateNext() {
-    if (currentImageIndex < currentDisplayedImages.length - 1) {
-        currentImageIndex++;
-        updateLightboxContent();
-    }
+function closeUploadModal() {
+    uploadModal.classList.remove('active');
+    uploadForm.reset();
+    handleFileSelect();
 }
 
-// Run Initialization
-document.addEventListener('DOMContentLoaded', initGallery);
+function handleImageUploadSubmit(e) {
+    e.preventDefault();
+    const file = imageUpload.files[0];
+    if (!file) return;
+
+    const tempUrl = URL.createObjectURL(file);
+    const title = document.getElementById('imageTitle').value;
+    const category = document.getElementById('imageCategory').value;
+    const filterSelected = document.getElementById('imageFilter').value;
+
+    const newImage = {
+        id: Date.now(),
+        src: tempUrl,
+        category: category,
+        title: title || "User Upload",
+        filterClass: filterSelected
+    };
+
+    images.unshift(newImage);
+    closeUploadModal();
+    
+    // Switch to uploaded category to show the image immediately
+    filterBtns.forEach(b => {
+        b.classList.toggle('active', b.dataset.filter === category);
+    });
+    renderImages(category);
+}
