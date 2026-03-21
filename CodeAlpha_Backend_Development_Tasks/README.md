@@ -58,16 +58,16 @@ Follow these steps to set up and run the application from scratch:
 ### 1. Clone or Download the Project
 If using Git, clone the repository to your local machine:
 ```bash
-git clone <repository_url>
+git clone https://github.com/SPANDAN2307/CodeAlpha_Tasks.git
 ```
-*(Replace `<repository_url>` with the actual repository link, or simply download and extract the project files as a ZIP archive.)*
+*(Or simply download and extract the project files as a ZIP archive from [GitHub](https://github.com/SPANDAN2307/CodeAlpha_Tasks/tree/main/CodeAlpha_Backend_Development_Tasks).)*
 
 ### 2. Navigate to the Project Directory
 Open your Command Prompt (cmd), PowerShell, or terminal, and navigate to the extracted project folder:
 ```bash
-cd F:\Intership\CodeAlpha_Tasks\CodeAlpha_Backend_Development_Tasks
+cd CodeAlpha_Tasks/CodeAlpha_Backend_Development_Tasks
 ```
-*(Adjust the file path if you saved the project in a different location.)*
+*(Alternatively, you can just use `cd path/to/your/extracted/CodeAlpha_Backend_Development_Tasks` if you downloaded the ZIP.)*
 
 ### 3. Run the setup and server using the Batch File (`run_server.bat`)
 The absolute easiest way to start the server is to use the provided `run_server.bat` file. It completely automates the installation of all necessary dependencies and launches the application.
