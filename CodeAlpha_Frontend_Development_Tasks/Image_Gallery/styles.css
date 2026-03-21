@@ -84,6 +84,7 @@ header h1 {
     margin-bottom: 0.75rem;
     background: var(--gradient-accent);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
 }
@@ -433,3 +434,125 @@ main {
         background: transparent;
     }
 }
+
+/* ==========================================================================
+   Upload Section
+   ========================================================================== */
+.upload-container {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(255,255,255,0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.upload-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-label {
+    background: var(--gradient-bg);
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-main);
+    border: 1px solid #cbd5e1;
+    transition: var(--transition-short);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.file-label:hover {
+    background: #e2e8f0;
+}
+
+.file-label input[type="file"] {
+    display: none;
+}
+
+.file-name {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.custom-select {
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid #cbd5e1;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background: white;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition-short);
+}
+
+.custom-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-light);
+}
+
+.submit-btn {
+    padding: 0.6rem 1.5rem;
+    background: var(--gradient-accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-glow);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.6);
+}
+
+/* ==========================================================================
+   CSS Image Filters
+   ========================================================================== */
+.css-filter-grayscale { filter: grayscale(100%); }
+.css-filter-sepia { filter: sepia(100%); }
+.css-filter-blur { filter: blur(4px); }
+.css-filter-brightness { filter: brightness(130%); }
+.css-filter-contrast { filter: contrast(150%); }
+.css-filter-hue-rotate { filter: hue-rotate(90deg); }
+.css-filter-none { filter: none; }

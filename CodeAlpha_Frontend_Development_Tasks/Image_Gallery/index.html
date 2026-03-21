@@ -26,6 +26,40 @@
             <button class="filter-btn" data-filter="animals">Animals</button>
         </div>
 
+        <!-- Image Upload Section -->
+        <div class="upload-container">
+            <h3 class="upload-title"><i class="fas fa-cloud-upload-alt"></i> Add New Image</h3>
+            <form id="uploadForm" class="upload-form">
+                <div class="form-group">
+                    <label for="imageUpload" class="file-label">
+                        <i class="fas fa-image"></i> Choose Image
+                        <input type="file" id="imageUpload" accept="image/*" required>
+                    </label>
+                    <span id="fileName" class="file-name">No file chosen</span>
+                </div>
+                <div class="form-group">
+                    <select id="imageCategory" required class="custom-select">
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="nature">Nature</option>
+                        <option value="architecture">Architecture</option>
+                        <option value="animals">Animals</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="imageFilter" class="custom-select">
+                        <option value="none">No Filter</option>
+                        <option value="grayscale">Grayscale</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="blur">Blur</option>
+                        <option value="brightness">Brightness</option>
+                        <option value="contrast">Contrast</option>
+                        <option value="hue-rotate">Hue Rotate</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-plus"></i> Add to Gallery</button>
+            </form>
+        </div>
+
         <!-- Gallery Grid -->
         <div class="gallery-grid" id="gallery">
             <!-- Images will be inserted here via JavaScript -->
