@@ -2,12 +2,10 @@
 // Initial Image Data
 // ==========================================================================
 let images = [
-    { id: 1, src: "https://images.unsplash.com/photo-1470071373511-b01633a60a4f?w=800&auto=format&fit=crop", category: "nature", title: "Misty Mountains", filterClass: "none" },
     { id: 2, src: "https://images.unsplash.com/photo-1449844908441-8829872d2607?w=600&auto=format&fit=crop", category: "architecture", title: "Modern Castle", filterClass: "none" },
     { id: 3, src: "https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&auto=format&fit=crop", category: "animals", title: "Red Fox", filterClass: "none" },
     { id: 4, src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=900&auto=format&fit=crop", category: "nature", title: "Mountain Peak", filterClass: "none" },
     { id: 5, src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=750&auto=format&fit=crop", category: "architecture", title: "City Life", filterClass: "none" },
-    { id: 6, src: "https://images.unsplash.com/photo-1543946207-39fdc0406592?w=800&auto=format&fit=crop", category: "animals", title: "Eagle", filterClass: "none" },
     { id: 7, src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=1200&auto=format&fit=crop", category: "nature", title: "Coastal View", filterClass: "none" },
     { id: 8, src: "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&h=800&auto=format&fit=crop", category: "architecture", title: "Urban Structures", filterClass: "none" },
     { id: 9, src: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=800&auto=format&fit=crop", category: "animals", title: "Lion Portrait", filterClass: "none" },
