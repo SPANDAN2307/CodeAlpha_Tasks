@@ -15,8 +15,9 @@ if not exist "node_modules\" (
     echo [1/3] Dependencies are already installed. Skipping installation.
 )
 
-echo [3/3] Starting the Server...
+echo [3/3] Starting the Server and opening your browser...
 echo.
+start http://localhost:3000
 node server.js
 
 pause
