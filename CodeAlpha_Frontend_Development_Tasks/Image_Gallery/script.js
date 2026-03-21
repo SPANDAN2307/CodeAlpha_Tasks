@@ -65,13 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function initTheme() {
     const savedTheme = localStorage.getItem('lumina-theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        body.classList.add('dark-mode');
+        document.documentElement.classList.add('dark-mode');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     }
     
     themeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        const isDark = body.classList.contains('dark-mode');
+        document.documentElement.classList.toggle('dark-mode');
+        const isDark = document.documentElement.classList.contains('dark-mode');
         themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         localStorage.setItem('lumina-theme', isDark ? 'dark' : 'light');
     });
