@@ -34,5 +34,3 @@ The CodeAlpha internship provides hands-on experience in building scalable appli
 Each project includes source code, documentation, and (if applicable) reports or demo videos as required by the internship guidelines.
 
 ---
-
-✨ Feel free to explore, fork, and contribute!
