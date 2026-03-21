@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina Gallery</title>
+    <title>Gallery</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
 
     <!-- Top Navigation -->
@@ -73,13 +75,14 @@
         <div class="modal-content">
             <button class="close-modal" id="closeUploadBtn"><i class="fas fa-times"></i></button>
             <h3 class="modal-title"><i class="fas fa-cloud-upload-alt"></i> Publish to Lumina</h3>
-            
+
             <form id="uploadForm" class="upload-form">
                 <div class="form-group full-width">
                     <label for="imageTitle">Image Title</label>
-                    <input type="text" id="imageTitle" class="custom-input" placeholder="e.g. Sunset at the Bay" required>
+                    <input type="text" id="imageTitle" class="custom-input" placeholder="e.g. Sunset at the Bay"
+                        required>
                 </div>
-                
+
                 <div class="form-group full-width">
                     <label for="imageUpload" class="dropzone" id="dropzoneLabel">
                         <i class="fas fa-image fa-3x"></i>
@@ -100,7 +103,7 @@
                             <option value="abstract">Abstract</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group half-width">
                         <label>Creative Filter</label>
                         <select id="imageFilter" class="custom-input">
@@ -114,7 +117,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <button type="submit" class="submit-btn full-width">
                     <i class="fas fa-paper-plane"></i> Publish Image
                 </button>
@@ -136,18 +139,19 @@
                 </button>
             </div>
         </div>
-        
+
         <button class="nav-btn prev-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
-        
+
         <div class="lightbox-body">
             <div class="img-wrapper">
                 <img class="lightbox-img" id="lightboxImg" src="" alt="Lightbox View">
             </div>
         </div>
-        
+
         <button class="nav-btn next-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
