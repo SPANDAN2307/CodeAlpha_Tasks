@@ -1,4 +1,3 @@
-// Image Data
 let images = [
     { id: 1, src: "https://picsum.photos/id/1015/800/600", category: "nature", title: "Misty Mountains", filterClass: "css-filter-none" },
     { id: 2, src: "https://picsum.photos/id/1040/800/600", category: "architecture", title: "Modern Castle", filterClass: "css-filter-none" },
@@ -8,7 +7,10 @@ let images = [
     { id: 6, src: "https://picsum.photos/id/1024/800/600", category: "animals", title: "Eagle", filterClass: "css-filter-none" },
     { id: 7, src: "https://picsum.photos/id/1019/800/600", category: "nature", title: "Coastal View", filterClass: "css-filter-none" },
     { id: 8, src: "https://picsum.photos/id/1044/800/600", category: "architecture", title: "Urban Structures", filterClass: "css-filter-none" },
-    { id: 9, src: "https://picsum.photos/id/1025/800/600", category: "animals", title: "Pug", filterClass: "css-filter-none" }
+    { id: 9, src: "https://picsum.photos/id/1025/800/600", category: "animals", title: "Pug", filterClass: "css-filter-none" },
+    { id: 10, src: "https://picsum.photos/id/1027/800/600", category: "people", title: "Portrait", filterClass: "css-filter-none" },
+    { id: 11, src: "https://picsum.photos/seed/travel/800/600", category: "travel", title: "Adventure", filterClass: "css-filter-none" },
+    { id: 12, src: "https://picsum.photos/seed/abstract/800/600", category: "abstract", title: "Abstract Art", filterClass: "css-filter-none" }
 ];
 
 // DOM Elements
