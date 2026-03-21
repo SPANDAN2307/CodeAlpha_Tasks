@@ -29,18 +29,18 @@ This is a comprehensive, full-stack URL shortener application built using Node.j
 
 ```text
 CodeAlpha_Backend_Development_Tasks/
-│
-├── public/                 # 🌐 Frontend UI Assets
-│   ├── index.html          # Main application user interface
-│   ├── style.css           # Styling for the application
-│   └── script.js           # Client-side logic and API consumption
-│
-├── database.sqlite         # 🗄️ SQLite Database File (Created automatically on startup)
-├── db.js                   # Database configuration and table initialization logic
-├── server.js               # 🚀 Main backend application and API route controllers
-├── run_server.bat          # ⚙️ Windows automation script to start the server easily
-├── package.json            # Node.js project configuration (Generated automatically)
-└── README.md               # 📖 Project documentation (This file)
+└── CodeAlpha_URL_shortner/ # Application working directory
+    ├── public/                 # 🌐 Frontend UI Assets
+    │   ├── index.html          # Main application user interface
+    │   ├── style.css           # Styling for the application
+    │   └── script.js           # Client-side logic and API consumption
+    │
+    ├── database.sqlite         # 🗄️ SQLite Database File (Created automatically on startup)
+    ├── db.js                   # Database configuration and table initialization logic
+    ├── server.js               # 🚀 Main backend application and API route controllers
+    ├── run_server.bat          # ⚙️ Windows automation script to start the server easily
+    ├── package.json            # Node.js project configuration (Generated automatically)
+    └── README.md               # 📖 Project documentation (This file)
 ```
 
 ---
@@ -65,9 +65,9 @@ git clone https://github.com/SPANDAN2307/CodeAlpha_Tasks.git
 ### 2. Navigate to the Project Directory
 Open your Command Prompt (cmd), PowerShell, or terminal, and navigate to the extracted project folder:
 ```bash
-cd CodeAlpha_Tasks/CodeAlpha_Backend_Development_Tasks
+cd CodeAlpha_Tasks/CodeAlpha_Backend_Development_Tasks/CodeAlpha_URL_shortner
 ```
-*(Alternatively, you can just use `cd path/to/your/extracted/CodeAlpha_Backend_Development_Tasks` if you downloaded the ZIP.)*
+*(Alternatively, you can just use `cd path/to/your/extracted/CodeAlpha_URL_shortner` if you downloaded the ZIP.)*
 
 ### 3. Run the setup and server using the Batch File (`run_server.bat`)
 The absolute easiest way to start the server is to use the provided `run_server.bat` file. It completely automates the installation of all necessary dependencies and launches the application.
