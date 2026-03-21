@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snip URL - Shorten your links</title>
+    <meta name="description" content="A simple and beautiful URL shortener.">
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <main class="glass-card">
+        <div class="header">
+            <h1>Snip URL <span class="emoji">✨</span></h1>
+            <p>Paste a long URL and make it short and sweet.</p>
+        </div>
+        
+        <form id="shorten-form" class="input-group">
+            <input type="url" id="long-url" placeholder="https://example.com/very/long/link" required>
+            <button type="submit" id="submit-btn">Shorten</button>
+        </form>
+
+        <div id="result-container" class="hidden">
+            <p>Your Snip:</p>
+            <div class="result-box">
+                <a id="short-url" href="#" target="_blank"></a>
+                <button id="copy-btn" title="Copy to clipboard">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+            <p id="copy-success" class="hidden">Copied to clipboard!</p>
+        </div>
+
+        <div id="error-message" class="error hidden"></div>
+    </main>
+    
+    <script src="/script.js"></script>
+</body>
+</html>
