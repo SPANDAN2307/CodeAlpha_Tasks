@@ -1,34 +1,33 @@
 @echo off
-:: Change to the directory of the batch file so it runs correctly even as Administrator
-cd /d "%~dp0"
-
-echo Starting URL Shortener Setup...
+echo Starting URL Shortener Setup
 echo.
 
-:: Check for Node.js
+:: Check if Node.js is installed
 node -v >nul 2>&1
-if %errorlevel% neq 0 (
+if errorlevel 1 (
     echo [ERROR] Node.js is not installed or not in your PATH.
-    @REM echo Please download and install Node.js from https://nodejs.org/
-    call winget install -e --id OpenJS.NodeJS
+    echo Installing Node.js using winget
+    winget install -e --id OpenJS.NodeJS
+    echo Please restart this script after installation.
     pause
     exit /b
 )
 
-if not exist "node_modules" (
-    echo [1/3] node_modules not found. Initializing package.json...
+:: Continue with setup
+if not exist "node_modules\" (
+    echo [1/3] node_modules not found. Initializing package.json
     if not exist "package.json" (
-        call npm init -y > nul
+        call npm init -y >nul
     )
     
-    echo [2/3] Installing dependencies (express, cors, sqlite3)...
+    echo [2/3] Installing dependencies (express, cors, sqlite3)
     call npm install express cors sqlite3
     echo.
 ) else (
     echo [1/3] Dependencies are already installed. Skipping installation.
 )
 
-echo [3/3] Starting the Server and opening your browser...
+echo [3/3] Starting the Server and opening your browser
 echo.
 start http://localhost:3000
 node server.js
