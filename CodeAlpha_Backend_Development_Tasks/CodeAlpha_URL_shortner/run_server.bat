@@ -9,7 +9,8 @@ echo.
 node -v >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Node.js is not installed or not in your PATH.
-    echo Please download and install Node.js from https://nodejs.org/
+    @REM echo Please download and install Node.js from https://nodejs.org/
+    call winget install -e --id OpenJS.NodeJS
     pause
     exit /b
 )
