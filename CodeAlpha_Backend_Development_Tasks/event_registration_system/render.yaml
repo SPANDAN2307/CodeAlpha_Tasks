@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: event-registration-system
+    env: node
+    buildCommand: npm run install-all && npm run build:frontend
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_API_URL
+        value: /api
+      # Uncomment and add Postgres connection string when using Postgres
+      # - key: DATABASE_URL
+      #   sync: false
