@@ -1,6 +1,7 @@
 services:
   - type: web
     name: event-registration-system
+    plan: free
     env: node
     buildCommand: npm run install-all && npm run build:frontend
     startCommand: npm start
