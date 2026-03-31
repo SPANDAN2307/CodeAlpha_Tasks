@@ -5,8 +5,11 @@ echo Starting Event Registration System (Frontend and Backend)
 echo =======================================================
 echo.
 
-:: Check if node_modules exists, if not, maybe prompt or just start.
-:: Here we just start since it's a simple run file.
+echo Checking and installing new dependencies (including Authentication packages)...
+call npm run install-all
+echo.
+
+echo Starting the servers...
 npm run dev
 
 pause
