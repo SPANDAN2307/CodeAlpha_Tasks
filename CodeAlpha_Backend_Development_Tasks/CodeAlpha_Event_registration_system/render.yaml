@@ -1,6 +1,7 @@
 services:
   - type: web
     name: event-registration-system
+    rootDir: CodeAlpha_Backend_Development_Tasks/CodeAlpha_Event_registration_system
     plan: free
     env: node
     buildCommand: npm run install-all && npm run build:frontend
@@ -8,6 +9,8 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: "20"
       - key: VITE_API_URL
         value: /api
       - key: DATABASE_URL
