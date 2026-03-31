@@ -4,7 +4,9 @@ const Event = require('../models/Event');
 // Register for an event
 exports.register = async (req, res) => {
   try {
-    const { eventId, userName, userEmail } = req.body;
+    const { eventId, userName } = req.body;
+    const userEmail = req.user.email;
+    const userId = req.user.id;
 
     // Check if event exists
     const event = await Event.findByPk(eventId);
@@ -17,12 +19,12 @@ exports.register = async (req, res) => {
     }
 
     // Check if user already registered for this event
-    const existingReg = await Registration.findOne({ where: { eventId, userEmail } });
+    const existingReg = await Registration.findOne({ where: { eventId, userId } });
     if (existingReg) {
       return res.status(400).json({ message: 'You have already registered for this event' });
     }
 
-    const registration = await Registration.create({ eventId, userName, userEmail });
+    const registration = await Registration.create({ eventId, userName: userName || 'User', userEmail, userId });
     res.status(201).json(registration);
   } catch (error) {
     res.status(400).json({ message: 'Registration failed', error: error.message });
@@ -32,11 +34,8 @@ exports.register = async (req, res) => {
 // Get registrations by user email
 exports.getUserRegistrations = async (req, res) => {
   try {
-    const { email } = req.query;
-    if (!email) return res.status(400).json({ message: 'Email query parameter required' });
-
     const registrations = await Registration.findAll({
-      where: { userEmail: email },
+      where: { userId: req.user.id },
       include: [{ model: Event }]
     });
     res.json(registrations);
@@ -49,8 +48,9 @@ exports.getUserRegistrations = async (req, res) => {
 exports.cancelRegistration = async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = await Registration.destroy({ where: { id } });
-    if (!deleted) return res.status(404).json({ message: 'Registration not found' });
+    const registration = await Registration.findOne({ where: { id, userId: req.user.id } });
+    if (!registration) return res.status(404).json({ message: 'Registration not found or unauthorized' });
+    await registration.destroy();
     
     res.json({ message: 'Registration cancelled successfully' });
   } catch (error) {

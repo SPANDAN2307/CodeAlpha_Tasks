@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getEventById, registerForEvent } from '../services/api';
 import { format } from 'date-fns';
-import { Calendar, MapPin, Info, Ticket, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Calendar, MapPin, Info, Ticket, ArrowLeft, CheckCircle2, LogIn } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 
 interface EventDetailsType {
   id: string;
@@ -22,8 +23,8 @@ const EventDetails = () => {
   const [event, setEvent] = useState<EventDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
   
+  const { user } = useAuth();
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -47,12 +48,17 @@ const EventDetails = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
     setIsSubmitting(true);
     setError('');
     
     try {
       if (id) {
-        await registerForEvent({ eventId: id, userName: name, userEmail: email });
+        await registerForEvent({ eventId: id, userName: name });
         setSuccess(true);
         setEvent(prev => prev ? { ...prev, remainingSpots: prev.remainingSpots - 1 } : prev);
       }
@@ -229,6 +235,20 @@ const EventDetails = () => {
                   View My Tickets
                 </motion.button>
               </motion.div>
+            ) : !user ? (
+              <div className="text-center py-6">
+                <p className="text-slate-600 dark:text-slate-400 mb-6 font-medium">
+                  Please log in to register for this event.
+                </p>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate('/login')}
+                  className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-4 rounded-2xl shadow-xl shadow-indigo-600/20 transition-all flex justify-center items-center gap-2 text-lg"
+                >
+                  <LogIn size={20} /> Login to Register
+                </motion.button>
+              </div>
             ) : (
               <form onSubmit={handleRegister} className="space-y-5">
                 {error && (
@@ -243,7 +263,7 @@ const EventDetails = () => {
                 
                 <div>
                   <label htmlFor="name" className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                    Full Name
+                    Attendee Name
                   </label>
                   <input
                     id="name"
@@ -257,22 +277,6 @@ const EventDetails = () => {
                   />
                 </div>
                 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    disabled={isFull || isSubmitting}
-                    className="w-full px-5 py-3.5 rounded-2xl border-2 border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-0 focus:border-indigo-500 dark:focus:border-indigo-500 transition-all font-medium disabled:opacity-50 outline-none"
-                    placeholder="jane@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </div>
-
                 <motion.button
                   whileHover={!isFull && !isSubmitting ? { scale: 1.02 } : {}}
                   whileTap={!isFull && !isSubmitting ? { scale: 0.98 } : {}}
@@ -288,9 +292,6 @@ const EventDetails = () => {
                     'Register Now'
                   )}
                 </motion.button>
-                <p className="text-xs text-center text-slate-500 dark:text-slate-400 mt-6 font-medium">
-                  Secure checkout. By registering, you agree to our Terms & Privacy Policy.
-                </p>
               </form>
             )}
           </motion.div>
