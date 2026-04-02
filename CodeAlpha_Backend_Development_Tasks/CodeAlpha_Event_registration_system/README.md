@@ -1,9 +1,24 @@
 # Event Registration System
 
-A full-stack application built with Express.js, Sequelize, React, and Tailwind CSS. The app features a modern UI with glassmorphism and allows users to browse events, register, and manage their tickets.
+A full-stack application built with Express.js, Sequelize, React, and Tailwind CSS. The app features a modern UI with glassmorphism and provides a robust registration system with role-based authentication.
+
+## Features
+
+- **Role-Based Authentication**: Secure login and registration using JWT and bcrypt.
+- **Admin Dashboard**: Only administrators can create and manage events.
+- **User Dashboard**: Users can browse events, register for them, and manage their tickets.
+- **Dynamic UI**: Modern, responsive frontend built with React and styled with Tailwind CSS.
 
 ## Getting Started Locally
 
+### The Easy Way (Windows only)
+For a seamless startup experience on Windows, simply run the included batch script. It will automatically check for dependencies, install them if necessary, and launch both the backend and frontend servers:
+1. Double-click on `run.bat` or run it from the command line:
+   ```cmd
+   run.bat
+   ```
+
+### Manual Setup
 1. **Install dependencies:**
    In the root directory, run:
    ```bash
