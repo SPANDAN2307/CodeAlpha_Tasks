@@ -6,11 +6,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AddEvent from './pages/AddEvent';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { Calendar, User, PlusCircle, LogOut, LogIn } from 'lucide-react';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { Calendar, User, PlusCircle, LogOut, LogIn, Sun, Moon } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
   const { user, isAdmin, logoutState } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   
   return (
     <motion.nav 
@@ -36,6 +38,13 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center space-x-3">
+            <button 
+              onClick={toggleTheme}
+              className="p-2 rounded-full text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 hover:bg-slate-200 dark:hover:bg-white/10 transition-all focus:outline-none"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun size={20} strokeWidth={2.5} /> : <Moon size={20} strokeWidth={2.5} />}
+            </button>
             {isAdmin && (
               <Link to="/admin/create-event">
                 <motion.div 
@@ -93,10 +102,11 @@ const Navbar = () => {
 function App() {
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
-          <Navbar />
-          <main className="min-h-[calc(100vh-5rem)]">
+      <ThemeProvider>
+        <AuthProvider>
+          <div className="min-h-screen bg-slate-50 dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 font-sans transition-colors duration-200">
+            <Navbar />
+            <main className="min-h-[calc(100vh-5rem)]">
             <Routes>
               <Route path="/" element={<EventList />} />
               <Route path="/events/:id" element={<EventDetails />} />
@@ -106,8 +116,9 @@ function App() {
               <Route path="/admin/create-event" element={<AddEvent />} />
             </Routes>
           </main>
-        </div>
-      </AuthProvider>
+          </div>
+        </AuthProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
