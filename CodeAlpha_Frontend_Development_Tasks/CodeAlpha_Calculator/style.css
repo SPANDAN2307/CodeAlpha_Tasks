@@ -1,32 +1,32 @@
 :root {
-  /* Light Theme Options */
-  --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  --calc-bg: rgba(255, 255, 255, 0.4);
-  --calc-border: rgba(255, 255, 255, 0.5);
-  --calc-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  /* Light Theme Options - Fresh Mint & Sky Blue */
+  --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  --calc-bg: rgba(255, 255, 255, 0.6);
+  --calc-border: rgba(255, 255, 255, 0.8);
+  --calc-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
   
-  --text-main: #1e1e24;
-  --text-history: #555560;
+  --text-main: #2d3436;
+  --text-history: #636e72;
   
-  --btn-bg: rgba(255, 255, 255, 0.5);
-  --btn-hover: rgba(255, 255, 255, 0.8);
-  --btn-border: rgba(255, 255, 255, 0.6);
-  --btn-active: rgba(255, 255, 255, 0.9);
+  --btn-bg: rgba(255, 255, 255, 0.7);
+  --btn-hover: rgba(255, 255, 255, 1);
+  --btn-border: rgba(255, 255, 255, 0.9);
+  --btn-active: rgba(240, 240, 240, 0.9);
   
-  --btn-operator-bg: rgba(142, 197, 252, 0.6);
-  --btn-operator-hover: rgba(142, 197, 252, 0.9);
-  --btn-operator-text: #0b4b8a;
+  --btn-operator-bg: rgba(116, 185, 255, 0.3);
+  --btn-operator-hover: rgba(116, 185, 255, 0.6);
+  --btn-operator-text: #0984e3;
   
-  --btn-action-bg: rgba(224, 195, 252, 0.6);
-  --btn-action-hover: rgba(224, 195, 252, 0.9);
-  --btn-action-text: #451b75;
+  --btn-action-bg: rgba(255, 118, 117, 0.2);
+  --btn-action-hover: rgba(255, 118, 117, 0.4);
+  --btn-action-text: #d63031;
   
-  --btn-equals-bg: linear-gradient(135deg, #6c5ce7, #a29bfe);
-  --btn-equals-hover: linear-gradient(135deg, #5b4bc4, #8c82ff);
+  --btn-equals-bg: linear-gradient(135deg, #00b894, #55efc4);
+  --btn-equals-hover: linear-gradient(135deg, #009c7a, #3cdbad);
   --btn-equals-text: #ffffff;
   
-  --shape-1: #e0c3fc;
-  --shape-2: #8ec5fc;
+  --shape-1: #55efc4;
+  --shape-2: #74b9ff;
 }
 
 [data-theme="dark"] {
@@ -79,7 +79,7 @@ body {
 .calculator-container {
   position: relative;
   width: 100%;
-  max-width: clamp(400px, 45vw, 800px);
+  max-width: clamp(350px, 35vw, 600px);
   padding: 20px;
   display: flex;
   justify-content: center;
@@ -214,8 +214,8 @@ body {
   background: var(--btn-bg);
   border: 1px solid var(--btn-border);
   border-radius: 15px;
-  padding: clamp(20px, 4vh, 35px) 0;
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  padding: clamp(18px, 3vh, 28px) 0;
+  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
   font-weight: 500;
   color: var(--text-main);
   cursor: pointer;
@@ -253,7 +253,7 @@ body {
 .btn-operator {
   background: var(--btn-operator-bg);
   color: var(--btn-operator-text);
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
   font-weight: 600;
 }
 
@@ -270,7 +270,7 @@ body {
   background: var(--btn-equals-bg);
   color: var(--btn-equals-text);
   border: none;
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.6rem, 2.2vw, 2.2rem);
   box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
 }
 
