@@ -4,14 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let previousInput = '';
     let operator = null;
     let shouldResetScreen = false;
-    
+    let historyList = [];
+
     // DOM Elements
     const elements = {
         currentDisplay: document.getElementById('current'),
         historyDisplay: document.getElementById('history'),
         themeBtn: document.getElementById('theme-btn'),
-        icon: document.querySelector('.theme-toggle .icon'),
-        buttons: document.querySelectorAll('.btn')
+        icon: document.querySelector('#theme-btn .icon'),
+        buttons: document.querySelectorAll('.btn'),
+        historyBtn: document.getElementById('history-toggle-btn'),
+        historyPanel: document.getElementById('history-panel'),
+        clearHistoryBtn: document.getElementById('clear-history-btn'),
+        historyListEl: document.getElementById('history-list')
     };
 
     // Event Listeners for Buttons
@@ -29,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listener for Theme Toggle
     elements.themeBtn.addEventListener('click', toggleTheme);
+
+    // Event Listeners for History
+    elements.historyBtn.addEventListener('click', toggleHistoryPanel);
+    elements.clearHistoryBtn.addEventListener('click', clearHistory);
+    
+    // Initialize History
+    renderHistory();
 
     // Core Logic Functions
     function handleButtonClick(button) {
@@ -80,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendNumber(number) {
         if (currentInput === '0' && number === '0') return;
         if (number === '.' && currentInput.includes('.')) return;
-        
+
         if (shouldResetScreen || currentInput === '0') {
             if (number === '.') {
                 currentInput = '0.';
@@ -100,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         if (currentInput === '' && previousInput === '') return;
-        
+
         if (previousInput !== '' && currentInput !== '') {
             evaluate();
         }
@@ -111,13 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function evaluate() {
         if (operator === null || currentInput === '' || previousInput === '') return;
-        
+
         let result;
         const prev = parseFloat(previousInput);
         const current = parseFloat(currentInput);
-        
+
         if (isNaN(prev) || isNaN(current)) return;
-        
+
         switch (operator) {
             case '+':
                 result = prev + current;
@@ -142,10 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
             default:
                 return;
         }
-        
+
         // Round to handle floating point issues
-        currentInput = Math.round(result * 10000000000) / 10000000000;
-        currentInput = currentInput.toString();
+        result = Math.round(result * 10000000000) / 10000000000;
+        
+        addToHistory(previousInput, operator, currentInput, result);
+        
+        currentInput = result.toString();
         operator = null;
         previousInput = '';
         shouldResetScreen = true;
@@ -172,10 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function formatNumber(numStr) {
         if (numStr === '-') return '-';
         if (numStr === '0.') return '0.';
-        
+
         const floatNumber = parseFloat(numStr);
         if (isNaN(floatNumber)) return '';
-        
+
         // Format with commas and keeping decimals
         const numberParts = numStr.toString().split('.');
         numberParts[0] = numberParts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -191,13 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateDisplay() {
         elements.currentDisplay.textContent = formatNumber(currentInput);
-        
+
         if (operator != null) {
             elements.historyDisplay.textContent = `${formatNumber(previousInput)} ${getOperatorSymbol(operator)}`;
         } else {
             elements.historyDisplay.textContent = '';
         }
-        
+
         // Dynamic font size adjustment based on length
         if (currentInput.length > 12) {
             elements.currentDisplay.style.fontSize = '1.8rem';
@@ -206,6 +221,47 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             elements.currentDisplay.style.fontSize = '3rem';
         }
+    }
+
+    // History Logic Functions
+    function addToHistory(prev, op, curr, res) {
+        historyList.push({ prev, op, curr, res });
+        renderHistory();
+    }
+
+    function renderHistory() {
+        elements.historyListEl.innerHTML = '';
+        if (historyList.length === 0) {
+            elements.historyListEl.innerHTML = '<div class="history-item-expr" style="text-align:center; margin-top:20px;">No history yet</div>';
+            return;
+        }
+        for (let i = historyList.length - 1; i >= 0; i--) {
+            const item = historyList[i];
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `
+                <div class="history-item-expr">${formatNumber(item.prev)} ${getOperatorSymbol(item.op)} ${formatNumber(item.curr)} =</div>
+                <div class="history-item-result">${formatNumber(item.res.toString())}</div>
+            `;
+            div.addEventListener('click', () => {
+                currentInput = item.res.toString();
+                previousInput = '';
+                operator = null;
+                shouldResetScreen = true;
+                updateDisplay();
+                toggleHistoryPanel();
+            });
+            elements.historyListEl.appendChild(div);
+        }
+    }
+
+    function toggleHistoryPanel() {
+        elements.historyPanel.classList.toggle('hidden');
+    }
+
+    function clearHistory() {
+        historyList = [];
+        renderHistory();
     }
 
     // Theme Toggle Functionality
