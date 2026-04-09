@@ -1,0 +1,286 @@
+:root {
+  /* Light Theme Options */
+  --bg-gradient: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+  --calc-bg: rgba(255, 255, 255, 0.4);
+  --calc-border: rgba(255, 255, 255, 0.5);
+  --calc-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  
+  --text-main: #1e1e24;
+  --text-history: #555560;
+  
+  --btn-bg: rgba(255, 255, 255, 0.5);
+  --btn-hover: rgba(255, 255, 255, 0.8);
+  --btn-border: rgba(255, 255, 255, 0.6);
+  --btn-active: rgba(255, 255, 255, 0.9);
+  
+  --btn-operator-bg: rgba(142, 197, 252, 0.6);
+  --btn-operator-hover: rgba(142, 197, 252, 0.9);
+  --btn-operator-text: #0b4b8a;
+  
+  --btn-action-bg: rgba(224, 195, 252, 0.6);
+  --btn-action-hover: rgba(224, 195, 252, 0.9);
+  --btn-action-text: #451b75;
+  
+  --btn-equals-bg: linear-gradient(135deg, #6c5ce7, #a29bfe);
+  --btn-equals-hover: linear-gradient(135deg, #5b4bc4, #8c82ff);
+  --btn-equals-text: #ffffff;
+  
+  --shape-1: #e0c3fc;
+  --shape-2: #8ec5fc;
+}
+
+[data-theme="dark"] {
+  --bg-gradient: linear-gradient(135deg, #1e1e24 0%, #2b2b36 100%);
+  --calc-bg: rgba(30, 30, 40, 0.6);
+  --calc-border: rgba(255, 255, 255, 0.1);
+  --calc-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  
+  --text-main: #ffffff;
+  --text-history: #a0a0b0;
+  
+  --btn-bg: rgba(40, 40, 50, 0.5);
+  --btn-hover: rgba(60, 60, 75, 0.7);
+  --btn-border: rgba(255, 255, 255, 0.05);
+  --btn-active: rgba(80, 80, 95, 0.8);
+  
+  --btn-operator-bg: rgba(255, 159, 67, 0.2);
+  --btn-operator-hover: rgba(255, 159, 67, 0.4);
+  --btn-operator-text: #ff9f43;
+  
+  --btn-action-bg: rgba(255, 107, 107, 0.2);
+  --btn-action-hover: rgba(255, 107, 107, 0.4);
+  --btn-action-text: #ff6b6b;
+  
+  --btn-equals-bg: linear-gradient(135deg, #ff9f43, #ff6b6b);
+  --btn-equals-hover: linear-gradient(135deg, #ee8b2f, #f05a5a);
+  --btn-equals-text: #ffffff;
+  
+  --shape-1: #ff6b6b;
+  --shape-2: #ff9f43;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-gradient);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.calculator-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shape {
+  position: absolute;
+  filter: blur(60px);
+  z-index: -1;
+  opacity: 0.8;
+  border-radius: 50%;
+  animation: float 8s infinite alternate ease-in-out;
+}
+
+.shape-1 {
+  background: var(--shape-1);
+  width: 250px;
+  height: 250px;
+  top: -50px;
+  left: -50px;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  background: var(--shape-2);
+  width: 200px;
+  height: 200px;
+  bottom: -30px;
+  right: -30px;
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+.calculator {
+  background: var(--calc-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--calc-border);
+  box-shadow: var(--calc-shadow);
+  border-radius: 30px;
+  padding: 30px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.theme-toggle {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  outline: none;
+}
+
+.theme-toggle:hover {
+  background: var(--btn-hover);
+  transform: scale(1.1);
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 15px 10px;
+  min-height: 100px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .display {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.history {
+  font-size: 1.1rem;
+  color: var(--text-history);
+  min-height: 1.5rem;
+  margin-bottom: 5px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.current {
+  font-size: 3rem;
+  color: var(--text-main);
+  font-weight: 600;
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.btn {
+  background: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  border-radius: 15px;
+  padding: 20px 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  outline: none;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active, .btn.pressed {
+  background: var(--btn-active);
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.05s ease, background 0.05s ease;
+}
+
+.btn-action {
+  background: var(--btn-action-bg);
+  color: var(--btn-action-text);
+  font-weight: 600;
+}
+
+.btn-action:hover {
+  background: var(--btn-action-hover);
+}
+
+.btn-operator {
+  background: var(--btn-operator-bg);
+  color: var(--btn-operator-text);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.btn-operator:hover {
+  background: var(--btn-operator-hover);
+}
+
+#btn-zero {
+  grid-column: span 2;
+  border-radius: 15px;
+}
+
+.btn-equals {
+  background: var(--btn-equals-bg);
+  color: var(--btn-equals-text);
+  border: none;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+[data-theme="dark"] .btn-equals {
+  box-shadow: 0 4px 15px rgba(255, 159, 67, 0.3);
+}
+
+.btn-equals:hover {
+  background: var(--btn-equals-hover);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+[data-theme="dark"] .btn-equals:hover {
+  box-shadow: 0 6px 20px rgba(255, 159, 67, 0.4);
+}
