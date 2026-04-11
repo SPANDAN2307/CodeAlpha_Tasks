@@ -149,15 +149,19 @@ const app = {
 
         html += `</div>`;
         this.container.innerHTML = html;
+        console.log("Found .add-to-cart buttons:", this.container.querySelectorAll('.add-to-cart').length);
 
-        // Bind add buttons
-        this.container.querySelectorAll('.add-to-cart').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = parseInt(e.currentTarget.dataset.id);
-                const itemData = this.state.menuData.find(i => i.id === id);
-                if (itemData) this.addToCart(itemData);
-            });
-        });
+        // Bind add buttons using Event Delegation to ensure flawless execution
+        this.container.onclick = (e) => {
+            const btn = e.target.closest('.add-to-cart');
+            if (!btn) return;
+            
+            const idStr = btn.dataset.id;
+            const id = parseInt(idStr);
+            const itemData = this.state.menuData.find(i => i.id === id);
+            
+            if (itemData) this.addToCart(itemData);
+        };
     },
 
     renderReservations() {
