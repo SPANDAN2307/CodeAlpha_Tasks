@@ -128,7 +128,7 @@ const app = {
         `;
 
         data.forEach(item => {
-            const isAvailable = item.InventoryItem && item.InventoryItem.quantity > 0;
+            const isAvailable = item.InventoryItem && item.InventoryItem.quantityInStock > 0;
             html += `
                 <div class="menu-item glass-panel">
                     <div class="header" style="display:flex; justify-content:space-between;">
@@ -441,9 +441,9 @@ const app = {
                                 <tr>
                                     <td>#${inv.menuItemId}</td>
                                     <td>${inv.MenuItem ? inv.MenuItem.name : 'Unknown Item'}</td>
-                                    <td><span class="badge ${inv.quantity < 10 ? 'empty' : 'food'}">${inv.quantity} units</span></td>
+                                    <td><span class="badge ${inv.quantityInStock < 10 ? 'empty' : 'food'}">${inv.quantityInStock} units</span></td>
                                     <td>
-                                        <button class="btn btn-outline btn-sm update-stock" data-id="${inv.id}" data-qty="${inv.quantity}" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Update</button>
+                                        <button class="btn btn-outline btn-sm update-stock" data-id="${inv.id}" data-qty="${inv.quantityInStock}" style="padding:0.3rem 0.6rem; font-size:0.8rem;">Update</button>
                                     </td>
                                 </tr>
                             `).join('')}

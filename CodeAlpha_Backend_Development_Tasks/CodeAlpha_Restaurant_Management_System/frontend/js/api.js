@@ -62,7 +62,7 @@ export const getInventory = () => request("/inventory");
 export const updateInventory = (id, quantity) => 
     request(`/inventory/${id}`, {
         method: "PATCH",
-        body: JSON.stringify({ quantity })
+        body: JSON.stringify({ quantityInStock: quantity })
     });
 
 export const getDailySales = (date) => 

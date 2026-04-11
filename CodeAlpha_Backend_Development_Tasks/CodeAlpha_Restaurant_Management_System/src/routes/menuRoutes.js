@@ -5,7 +5,10 @@ const adminAuth = require("../middleware/adminAuth");
 const router = express.Router();
 
 router.get("/", async (_req, res) => {
-  const items = await MenuItem.findAll({ order: [["name", "ASC"]] });
+  const items = await MenuItem.findAll({ 
+    include: [InventoryItem],
+    order: [["name", "ASC"]] 
+  });
   return res.json(items);
 });
 
