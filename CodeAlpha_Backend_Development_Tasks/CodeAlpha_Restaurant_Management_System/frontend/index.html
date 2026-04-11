@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina - Premium Dining</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-brand">
+            <h1>Lumina</h1>
+            <span>Fine Dining</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" data-view="menu" class="active">Menu</a></li>
+            <li><a href="#" data-view="reservations">Reservations</a></li>
+            <li><a href="#" data-view="cart">Order <span id="cart-count">0</span></a></li>
+            <li><a href="#" data-view="admin"><i class="fa-solid fa-lock"></i> Admin</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-container" class="container">
+        <!-- Views will be injected here via app.js -->
+        <div class="loader">
+            <div class="spinner"></div>
+            <p>Loading the finest ingredients...</p>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <div id="modal-content" class="modal-content glass-panel">
+            <button id="modal-close" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="./js/api.js" type="module"></script>
+    <script src="./js/app.js" type="module"></script>
+</body>
+</html>
