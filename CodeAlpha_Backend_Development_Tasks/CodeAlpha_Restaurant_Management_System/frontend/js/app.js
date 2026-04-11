@@ -135,7 +135,7 @@ const app = {
                         <h3>${item.name}</h3>
                         <span class="badge ${item.category}">${item.category}</span>
                     </div>
-                    <div class="price">$${Number(item.price).toFixed(2)}</div>
+                    <div class="price">₹${Number(item.price).toFixed(2)}</div>
                     <p>${item.description || 'A delicious treat.'}</p>
                     <div class="footer">
                         ${isAvailable 
@@ -275,13 +275,13 @@ const app = {
                 <div class="cart-item">
                     <div>
                         <h4 style="margin-bottom:0.25rem;">${item.name}</h4>
-                        <span style="color:var(--text-muted); font-size:0.9rem;">$${Number(item.price).toFixed(2)}</span>
+                        <span style="color:var(--text-muted); font-size:0.9rem;">₹${Number(item.price).toFixed(2)}</span>
                     </div>
                     <div class="cart-item-actions">
                         <button class="quantity-btn dec" data-idx="${index}">-</button>
                         <span>${item.quantity}</span>
                         <button class="quantity-btn inc" data-idx="${index}">+</button>
-                        <span style="width: 80px; text-align:right; font-weight:600;">$${subtotal.toFixed(2)}</span>
+                        <span style="width: 80px; text-align:right; font-weight:600;">₹${subtotal.toFixed(2)}</span>
                     </div>
                 </div>
             `;
@@ -289,7 +289,7 @@ const app = {
 
         html += `
                 <div class="cart-total">
-                    Total: <span style="color:var(--primary)">$${total.toFixed(2)}</span>
+                    Total: <span style="color:var(--primary)">₹${total.toFixed(2)}</span>
                 </div>
                 <div style="margin-top:2rem; padding-top:2rem; border-top:1px solid var(--glass-border);">
                     <h3>Dine-in Details</h3>
