@@ -381,18 +381,50 @@ const app = {
 
         try {
             // Test auth by fetching inventory
+            // Test auth by fetching inventory and menu
             const inventory = await api.getInventory();
+            const menus = await api.getMenu();
             
             // Build Dashboard
             this.container.innerHTML = `
                 <div class="view-header">
                     <div>
                         <h2>Admin Dashboard</h2>
-                        <p>Manage inventory operations</p>
+                        <p>Manage inventory operations and menu architecture</p>
                     </div>
                     <button id="admin-logout" class="btn btn-outline"><i class="fa-solid fa-power-off"></i> Logout</button>
                 </div>
                 
+                <div class="glass-panel" style="margin-bottom: 2rem;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                        <h3>Menu Management</h3>
+                        <button id="add-menu-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Add Item</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${menus.map(menu => `
+                                <tr>
+                                    <td><strong>${menu.name}</strong><br><small style="color:var(--text-muted)">${menu.description}</small></td>
+                                    <td><span class="badge ${menu.category}">${menu.category}</span></td>
+                                    <td>₹${Number(menu.price).toFixed(2)}</td>
+                                    <td>
+                                        <button class="btn btn-outline btn-sm edit-menu" data-id="${menu.id}" style="padding:0.3rem 0.6rem; font-size:0.8rem; margin-right: 0.25rem;"><i class="fa-solid fa-pen"></i></button>
+                                        <button class="btn btn-outline btn-sm delete-menu" data-id="${menu.id}" style="padding:0.3rem 0.6rem; font-size:0.8rem; border-color:var(--accent); color:var(--accent);"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
                 <div class="glass-panel">
                     <h3 style="margin-bottom:1rem;">Current Inventory Stack</h3>
                     <table>
@@ -425,6 +457,100 @@ const app = {
                 this.renderAdmin();
             });
 
+            // Bind Menu Actions
+            document.getElementById('add-menu-btn').addEventListener('click', () => {
+                this.openModal(`
+                    <h3 style="margin-bottom:1rem;">Add New Menu Item</h3>
+                    <form id="add-menu-form">
+                        <div class="form-group"><label>Name</label><input type="text" id="m-name" class="form-control" required></div>
+                        <div class="form-group"><label>Description</label><input type="text" id="m-desc" class="form-control" required></div>
+                        <div style="display:flex; gap:1rem;">
+                            <div class="form-group" style="flex:1;"><label>Price (₹)</label><input type="number" step="0.01" id="m-price" class="form-control" required></div>
+                            <div class="form-group" style="flex:1;"><label>Category</label>
+                                <select id="m-cat" class="form-control" required style="background:var(--glass-bg); color:var(--text); border:1px solid var(--glass-border); padding: 0.75rem; border-radius: 8px;">
+                                    <option value="Main">Main</option>
+                                    <option value="Side">Side</option>
+                                    <option value="Beverage">Beverage</option>
+                                    <option value="Dessert">Dessert</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group"><label>Initial Stock Count</label><input type="number" id="m-stock" class="form-control" value="0" required></div>
+                        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Create Item</button>
+                    </form>
+                `);
+                document.getElementById('add-menu-form').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    try {
+                        await api.addMenuItem({
+                            name: document.getElementById('m-name').value,
+                            description: document.getElementById('m-desc').value,
+                            price: parseFloat(document.getElementById('m-price').value),
+                            category: document.getElementById('m-cat').value,
+                            initialStock: parseInt(document.getElementById('m-stock').value)
+                        });
+                        this.closeModal();
+                        this.showToast('Menu item added successfully');
+                        this.renderAdmin();
+                    } catch (err) { this.showToast(err.message, 'error'); }
+                });
+            });
+
+            this.container.querySelectorAll('.edit-menu').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.currentTarget.dataset.id);
+                    const item = menus.find(m => m.id === id);
+                    if(!item) return;
+                    this.openModal(`
+                        <h3 style="margin-bottom:1rem;">Edit Menu Item</h3>
+                        <form id="edit-menu-form">
+                            <div class="form-group"><label>Name</label><input type="text" id="m-name" class="form-control" value="${item.name}" required></div>
+                            <div class="form-group"><label>Description</label><input type="text" id="m-desc" class="form-control" value="${item.description}" required></div>
+                            <div style="display:flex; gap:1rem;">
+                                <div class="form-group" style="flex:1;"><label>Price (₹)</label><input type="number" step="0.01" id="m-price" class="form-control" value="${item.price}" required></div>
+                                <div class="form-group" style="flex:1;"><label>Category</label>
+                                    <select id="m-cat" class="form-control" required style="background:var(--glass-bg); color:var(--text); border:1px solid var(--glass-border); padding: 0.75rem; border-radius: 8px;">
+                                        <option value="Main" ${item.category==='Main'?'selected':''}>Main</option>
+                                        <option value="Side" ${item.category==='Side'?'selected':''}>Side</option>
+                                        <option value="Beverage" ${item.category==='Beverage'?'selected':''}>Beverage</option>
+                                        <option value="Dessert" ${item.category==='Dessert'?'selected':''}>Dessert</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Save Changes</button>
+                        </form>
+                    `);
+                    document.getElementById('edit-menu-form').addEventListener('submit', async (e2) => {
+                        e2.preventDefault();
+                        try {
+                            await api.updateMenuItem(id, {
+                                name: document.getElementById('m-name').value,
+                                description: document.getElementById('m-desc').value,
+                                price: parseFloat(document.getElementById('m-price').value),
+                                category: document.getElementById('m-cat').value
+                            });
+                            this.closeModal();
+                            this.showToast('Menu item updated');
+                            this.renderAdmin();
+                        } catch (err) { this.showToast(err.message, 'error'); }
+                    });
+                });
+            });
+
+            this.container.querySelectorAll('.delete-menu').forEach(btn => {
+                btn.addEventListener('click', async (e) => {
+                    const id = e.currentTarget.dataset.id;
+                    if(confirm("Are you sure? This will permanently delete the item and its inventory tracking.")) {
+                        try {
+                            await api.deleteMenuItem(id);
+                            this.showToast('Menu item deleted');
+                            this.renderAdmin();
+                        } catch (err) { this.showToast(err.message, 'error'); }
+                    }
+                });
+            });
+
+            // Bind Inventory Actions
             this.container.querySelectorAll('.update-stock').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const id = e.currentTarget.dataset.id;
@@ -436,7 +562,7 @@ const app = {
                                 <label>New Quantity</label>
                                 <input type="number" id="new-qty" value="${oldQty}" min="0" class="form-control" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Save Changes</button>
                         </form>
                     `);
 

@@ -70,3 +70,20 @@ export const getDailySales = (date) =>
 
 export const getStockAlerts = (threshold = 10) => 
     request(`/reports/stock-alerts?threshold=${threshold}`);
+
+export const addMenuItem = (data) =>
+    request("/menu", {
+        method: "POST",
+        body: JSON.stringify(data)
+    });
+
+export const updateMenuItem = (id, data) =>
+    request(`/menu/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(data)
+    });
+
+export const deleteMenuItem = (id) =>
+    request(`/menu/${id}`, {
+        method: "DELETE"
+    });
