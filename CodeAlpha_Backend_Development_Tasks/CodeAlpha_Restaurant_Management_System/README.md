@@ -13,16 +13,36 @@ Express.js backend for managing menu, tables, reservations, orders, and inventor
   - Daily sales
   - Stock alerts
 
-## Setup
+## Setup & Installation
 
-1. Install dependencies:
-   - `npm install`
-2. Copy env file:
-   - `copy .env.example .env`
-3. Start server:
-   - `npm run dev`
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/SPANDAN2307/CodeAlpha_Tasks.git
+   cd CodeAlpha_Tasks/CodeAlpha_Backend_Development_Tasks/CodeAlpha_Restaurant_Management_System
+   ```
 
-Server runs on `http://localhost:4000` by default.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables:**
+   ```bash
+   copy .env.example .env
+   ```
+
+4. **Run the application:**
+   You can easily start both the Frontend UI and Backend API server together using the provided batch file (Windows):
+   ```cmd
+   run.bat
+   ```
+   
+   Alternatively, to start just the backend server manually:
+   ```bash
+   npm run dev
+   ```
+
+The Backend server runs on `http://localhost:4000` by default. The Frontend UI (if started via `run.bat`) runs on `http://localhost:3000`.
 
 ## API Overview
 
