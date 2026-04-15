@@ -1,7 +1,11 @@
 // Vercel Serverless Entry Point
 // Wraps the Express app as a serverless function
 
-require("dotenv").config();
+try {
+  require("dotenv").config();
+} catch (e) {
+  // dotenv may not be needed on Vercel (env vars set via dashboard)
+}
 
 const app = require("../src/app");
 const { sequelize } = require("../src/models");
@@ -16,13 +20,15 @@ async function initialize() {
     await sequelize.sync();
     await seedData();
     isInitialized = true;
-    console.log("✅ Database initialized on Vercel");
+    console.log("✅ Database initialized");
   } catch (error) {
-    console.error("Failed to initialize database:", error);
+    console.error("❌ Database init failed:", error.message);
+    // Don't throw - let the app still respond with error messages
+    isInitialized = true;
   }
 }
 
-// Export handler
+// Export handler for Vercel
 module.exports = async (req, res) => {
   await initialize();
   return app(req, res);
