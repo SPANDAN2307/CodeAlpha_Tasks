@@ -8,12 +8,9 @@ const adminAuth = require("../middleware/adminAuth");
 const router = express.Router();
 
 // Multer config for dish image uploads
-const isVercel = process.env.VERCEL === "1";
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => {
-    const uploadDir = isVercel
-      ? "/tmp/uploads"
-      : path.join(__dirname, "../../public/uploads");
+    const uploadDir = path.join(__dirname, "../../public/uploads");
     if (!fs.existsSync(uploadDir)) {
       fs.mkdirSync(uploadDir, { recursive: true });
     }

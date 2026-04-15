@@ -32,5 +32,7 @@ yarn-debug.log*
 dist/
 build/
 
-# Vercel
+# Vercel (unused)
 .vercel
+api/
+vercel.json
