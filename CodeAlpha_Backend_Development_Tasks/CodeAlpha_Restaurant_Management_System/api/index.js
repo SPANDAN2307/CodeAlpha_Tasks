@@ -1,20 +1,28 @@
 // Vercel Serverless Entry Point
-// Wraps the Express app as a serverless function
+// Uses lazy initialization with diagnostic error reporting
 
+let app, sequelize, seedData;
+let initError = null;
+let isInitialized = false;
+
+// Try loading modules (catches native module failures)
 try {
   require("dotenv").config();
-} catch (e) {
-  // dotenv may not be needed on Vercel (env vars set via dashboard)
+} catch (_) {}
+
+try {
+  app = require("../src/app");
+  const models = require("../src/models");
+  sequelize = models.sequelize;
+  seedData = require("../src/seed");
+} catch (error) {
+  initError = error;
+  console.error("❌ Module load failed:", error.message);
 }
-
-const app = require("../src/app");
-const { sequelize } = require("../src/models");
-const seedData = require("../src/seed");
-
-let isInitialized = false;
 
 async function initialize() {
   if (isInitialized) return;
+  if (initError) return; // Don't try DB if modules failed
   try {
     await sequelize.authenticate();
     await sequelize.sync();
@@ -22,14 +30,25 @@ async function initialize() {
     isInitialized = true;
     console.log("✅ Database initialized");
   } catch (error) {
-    console.error("❌ Database init failed:", error.message);
-    // Don't throw - let the app still respond with error messages
-    isInitialized = true;
+    console.error("❌ DB init failed:", error.message);
+    initError = error;
   }
 }
 
-// Export handler for Vercel
 module.exports = async (req, res) => {
-  await initialize();
+  // If modules failed to load, return diagnostic error
+  if (initError && !app) {
+    return res.status(500).json({
+      error: "Server initialization failed",
+      message: initError.message,
+      hint: "Check Vercel function logs for details",
+    });
+  }
+
+  try {
+    await initialize();
+  } catch (_) {}
+
+  // If DB failed but Express loaded, still try to serve static files
   return app(req, res);
 };

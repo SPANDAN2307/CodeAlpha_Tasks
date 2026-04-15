@@ -2,7 +2,7 @@
   "version": 2,
   "functions": {
     "api/index.js": {
-      "includeFiles": "frontend/**,src/**,public/**",
+      "includeFiles": ["frontend/**", "src/**", "public/**"],
       "maxDuration": 30
     }
   },
