@@ -3,51 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumina - Premium Dining</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Spice Route — Indian Restaurant | Order Online</title>
+    <meta name="description" content="Order delicious Indian cuisine online. Explore our menu of authentic dishes, biryanis, kebabs and more. Fast delivery and dine-in available.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    
-    <!-- Navigation -->
-    <nav class="glass-nav">
-        <div class="nav-brand">
-            <h1>Lumina</h1>
-            <span>Fine Dining</span>
+    <!-- ═══════ HEADER ═══════ -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="header-left">
+                <div class="logo" id="logo">
+                    <div class="logo-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Spice Route</h1>
+                        <span class="logo-tagline">Authentic Indian Cuisine</span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="search-bar" id="search-bar">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Search for dishes..." autocomplete="off">
+                    <button class="search-clear hidden" id="search-clear">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+                <nav class="nav-links">
+                    <a href="#" class="nav-link active" data-view="menu" id="nav-menu">
+                        <i class="fa-solid fa-bowl-food"></i>
+                        <span>Menu</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="orders" id="nav-orders">
+                        <i class="fa-solid fa-receipt"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="reservations" id="nav-reservations">
+                        <i class="fa-solid fa-calendar-check"></i>
+                        <span>Reserve</span>
+                    </a>
+                    <a href="#" class="nav-link" data-view="admin" id="nav-admin">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Admin</span>
+                    </a>
+                    <a href="#" class="nav-link cart-link" data-view="cart" id="nav-cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Cart</span>
+                        <span class="cart-badge hidden" id="cart-badge">0</span>
+                    </a>
+                </nav>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
-        <ul class="nav-links">
-            <li><a href="#" data-view="menu" class="active">Menu</a></li>
-            <li><a href="#" data-view="reservations">Reservations</a></li>
-            <li><a href="#" data-view="cart">Order <span id="cart-count">0</span></a></li>
-            <li><a href="#" data-view="admin"><i class="fa-solid fa-lock"></i> Admin</a></li>
-        </ul>
-    </nav>
+    </header>
 
-    <!-- Main Content Area -->
-    <main id="app-container" class="container">
-        <!-- Views will be injected here via app.js -->
-        <div class="loader">
-            <div class="spinner"></div>
-            <p>Loading the finest ingredients...</p>
-        </div>
-    </main>
-
-    <!-- Modals -->
-    <div id="modal-overlay" class="modal-overlay hidden">
-        <div id="modal-content" class="modal-content glass-panel">
-            <button id="modal-close" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
-            <div id="modal-body"></div>
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay hidden" id="mobile-nav-overlay">
+        <div class="mobile-nav">
+            <div class="mobile-nav-header">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <div class="logo-text"><h2>Spice Route</h2></div>
+                </div>
+                <button class="mobile-nav-close" id="mobile-nav-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-links">
+                <a href="#" class="mobile-nav-link active" data-view="menu">
+                    <i class="fa-solid fa-bowl-food"></i> Menu
+                </a>
+                <a href="#" class="mobile-nav-link" data-view="orders">
+                    <i class="fa-solid fa-receipt"></i> Orders
+                </a>
+                <a href="#" class="mobile-nav-link" data-view="reservations">
+                    <i class="fa-solid fa-calendar-check"></i> Reservations
+                </a>
+                <a href="#" class="mobile-nav-link" data-view="admin">
+                    <i class="fa-solid fa-shield-halved"></i> Admin Panel
+                </a>
+                <a href="#" class="mobile-nav-link" data-view="cart">
+                    <i class="fa-solid fa-cart-shopping"></i> Cart <span class="cart-badge-mobile" id="cart-badge-mobile">0</span>
+                </a>
+            </nav>
         </div>
     </div>
 
-    <!-- Notification Toast -->
-    <div id="toast-container" class="toast-container"></div>
+    <!-- ═══════ MAIN CONTENT ═══════ -->
+    <main class="main" id="main-content">
+        <!-- Loader -->
+        <div class="page-loader" id="page-loader">
+            <div class="loader-spinner"></div>
+            <p>Preparing your culinary experience...</p>
+        </div>
+    </main>
 
-    <script src="./js/api.js" type="module"></script>
-    <script src="./js/app.js" type="module"></script>
+    <!-- ═══════ MODAL ═══════ -->
+    <div class="modal-overlay hidden" id="modal-overlay">
+        <div class="modal-container" id="modal-container">
+            <button class="modal-close-btn" id="modal-close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- ═══════ TOAST CONTAINER ═══════ -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- ═══════ JS ═══════ -->
+    <script src="./js/utils.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/cartView.js"></script>
+    <script src="./js/menuView.js"></script>
+    <script src="./js/orderView.js"></script>
+    <script src="./js/reservationView.js"></script>
+    <script src="./js/adminView.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>

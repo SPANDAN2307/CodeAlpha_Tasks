@@ -1,21 +1,23 @@
 {
-  "name": "cursor",
-  "version": "1.0.0",
-  "description": "",
+  "name": "restaurant-management-system",
+  "version": "2.0.0",
+  "description": "A full-stack Restaurant Management System with Swiggy-inspired UI, admin panel, dish ratings, and multi-category Indian cuisine menu",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
+    "seed": "node src/seed.js",
     "test": "echo \"No tests configured\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["restaurant", "management", "express", "sequelize", "swiggy"],
+  "author": "Spandan",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
+    "multer": "^1.4.5-lts.1",
     "sequelize": "^6.37.8",
     "sqlite3": "^6.0.1"
   }

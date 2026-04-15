@@ -17,6 +17,27 @@ module.exports = (sequelize) =>
       },
       category: {
         type: DataTypes.STRING,
+        defaultValue: "Main Course",
+      },
+      imageUrl: {
+        type: DataTypes.STRING,
+        defaultValue: null,
+      },
+      rating: {
+        type: DataTypes.FLOAT,
+        defaultValue: 4.0,
+      },
+      ratingCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      isVeg: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
+      preparationTime: {
+        type: DataTypes.INTEGER,
+        defaultValue: 30,
       },
       isAvailable: {
         type: DataTypes.BOOLEAN,
