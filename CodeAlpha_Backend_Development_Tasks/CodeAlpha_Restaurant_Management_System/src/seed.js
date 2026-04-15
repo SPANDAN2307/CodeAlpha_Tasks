@@ -19,7 +19,7 @@ async function seedData() {
       preparationTime: 20,
       rating: 4.5,
       ratingCount: 12,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=400&h=300&fit=crop",
     },
     {
       name: "Chicken Malai Tikka",
@@ -30,7 +30,7 @@ async function seedData() {
       preparationTime: 25,
       rating: 4.7,
       ratingCount: 18,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop",
     },
     {
       name: "Veg Spring Rolls",
@@ -41,7 +41,7 @@ async function seedData() {
       preparationTime: 15,
       rating: 4.2,
       ratingCount: 8,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1606525437679-037aca74a3e9?w=400&h=300&fit=crop",
     },
     {
       name: "Mutton Seekh Kebab",
@@ -52,7 +52,7 @@ async function seedData() {
       preparationTime: 30,
       rating: 4.6,
       ratingCount: 14,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop",
     },
 
     // ── Main Course ──
@@ -65,7 +65,7 @@ async function seedData() {
       preparationTime: 25,
       rating: 4.4,
       ratingCount: 22,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop",
     },
     {
       name: "Butter Chicken",
@@ -76,7 +76,7 @@ async function seedData() {
       preparationTime: 30,
       rating: 4.8,
       ratingCount: 35,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop&q=80",
     },
     {
       name: "Dal Makhani",
@@ -87,7 +87,7 @@ async function seedData() {
       preparationTime: 35,
       rating: 4.5,
       ratingCount: 20,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop",
     },
     {
       name: "Lamb Rogan Josh",
@@ -98,7 +98,7 @@ async function seedData() {
       preparationTime: 40,
       rating: 4.6,
       ratingCount: 16,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1545247181-516773cae754?w=400&h=300&fit=crop",
     },
 
     // ── Biryani ──
@@ -111,7 +111,7 @@ async function seedData() {
       preparationTime: 45,
       rating: 4.9,
       ratingCount: 42,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400&h=300&fit=crop",
     },
     {
       name: "Chicken Biryani",
@@ -122,7 +122,7 @@ async function seedData() {
       preparationTime: 40,
       rating: 4.7,
       ratingCount: 30,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&h=300&fit=crop",
     },
     {
       name: "Veg Biryani",
@@ -133,7 +133,7 @@ async function seedData() {
       preparationTime: 35,
       rating: 4.3,
       ratingCount: 15,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1645177628172-a94c1f96e6db?w=400&h=300&fit=crop",
     },
 
     // ── Breads ──
@@ -146,7 +146,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.6,
       ratingCount: 25,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=300&fit=crop",
     },
     {
       name: "Cheese Stuffed Kulcha",
@@ -157,7 +157,7 @@ async function seedData() {
       preparationTime: 12,
       rating: 4.4,
       ratingCount: 10,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1600628421055-4d30de868b8f?w=400&h=300&fit=crop",
     },
     {
       name: "Laccha Paratha",
@@ -168,7 +168,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.3,
       ratingCount: 9,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop",
     },
 
     // ── Desserts ──
@@ -181,7 +181,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.7,
       ratingCount: 28,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1666190094742-0df74bcad9c6?w=400&h=300&fit=crop",
     },
     {
       name: "Kesari Rasmalai",
@@ -192,7 +192,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.8,
       ratingCount: 20,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1571006776337-df74994b5e0a?w=400&h=300&fit=crop",
     },
     {
       name: "Brownie with Ice Cream",
@@ -203,7 +203,7 @@ async function seedData() {
       preparationTime: 12,
       rating: 4.5,
       ratingCount: 17,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
     },
 
     // ── Beverages ──
@@ -216,7 +216,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.6,
       ratingCount: 22,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1527585743534-7113e3648747?w=400&h=300&fit=crop",
     },
     {
       name: "Masala Chai",
@@ -227,7 +227,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.4,
       ratingCount: 18,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&h=300&fit=crop",
     },
     {
       name: "Fresh Lime Soda",
@@ -238,7 +238,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.2,
       ratingCount: 12,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1513558161293-cdaf765ed514?w=400&h=300&fit=crop",
     },
     {
       name: "Cold Coffee",
@@ -249,7 +249,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.5,
       ratingCount: 15,
-      imageUrl: null,
+      imageUrl: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop",
     },
   ]);
 
