@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "seed": "node src/seed.js",
-    "vercel-build": "npm rebuild sqlite3",
+    "vercel-build": "echo 'No build step needed'",
     "test": "echo \"No tests configured\""
   },
   "engines": {
@@ -22,6 +22,8 @@
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
     "multer": "^1.4.5-lts.1",
+    "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.8",
     "sqlite3": "^5.1.7"
   }

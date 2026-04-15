@@ -1,14 +1,13 @@
 // Vercel Serverless Entry Point
-// Uses lazy initialization with diagnostic error reporting
+// Uses PostgreSQL (Neon) instead of SQLite on Vercel
+
+try {
+  require("dotenv").config();
+} catch (_) {}
 
 let app, sequelize, seedData;
 let initError = null;
 let isInitialized = false;
-
-// Try loading modules (catches native module failures)
-try {
-  require("dotenv").config();
-} catch (_) {}
 
 try {
   app = require("../src/app");
@@ -17,38 +16,34 @@ try {
   seedData = require("../src/seed");
 } catch (error) {
   initError = error;
-  console.error("❌ Module load failed:", error.message);
+  console.error("❌ Module load failed:", error.message, error.stack);
 }
 
 async function initialize() {
   if (isInitialized) return;
-  if (initError) return; // Don't try DB if modules failed
+  if (initError) return;
   try {
     await sequelize.authenticate();
+    console.log("✅ Database connected");
     await sequelize.sync();
+    console.log("✅ Tables synced");
     await seedData();
+    console.log("✅ Seed complete");
     isInitialized = true;
-    console.log("✅ Database initialized");
   } catch (error) {
-    console.error("❌ DB init failed:", error.message);
+    console.error("❌ DB init failed:", error.message, error.stack);
     initError = error;
   }
 }
 
 module.exports = async (req, res) => {
-  // If modules failed to load, return diagnostic error
   if (initError && !app) {
     return res.status(500).json({
       error: "Server initialization failed",
       message: initError.message,
-      hint: "Check Vercel function logs for details",
     });
   }
 
-  try {
-    await initialize();
-  } catch (_) {}
-
-  // If DB failed but Express loaded, still try to serve static files
+  await initialize();
   return app(req, res);
 };
