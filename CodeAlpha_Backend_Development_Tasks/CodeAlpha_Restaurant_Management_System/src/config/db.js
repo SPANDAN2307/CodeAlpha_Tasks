@@ -1,6 +1,11 @@
 const { Sequelize } = require("sequelize");
+const path = require("path");
 
-const databasePath = process.env.DATABASE_PATH || "./restaurant.sqlite";
+// On Vercel, filesystem is read-only except /tmp
+const isVercel = process.env.VERCEL === "1";
+const databasePath = isVercel
+  ? "/tmp/restaurant.sqlite"
+  : process.env.DATABASE_PATH || "./restaurant.sqlite";
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
