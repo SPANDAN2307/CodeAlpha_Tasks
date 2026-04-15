@@ -4,9 +4,15 @@ const isVercel = process.env.VERCEL === "1";
 
 let sequelize;
 
-if (isVercel && process.env.DATABASE_URL) {
-  // ── Vercel: Use PostgreSQL (Neon free tier) ──
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+if (isVercel) {
+  // ── Vercel: ALWAYS use PostgreSQL (Neon) ──
+  const dbUrl = process.env.DATABASE_URL;
+  if (!dbUrl) {
+    throw new Error(
+      "DATABASE_URL is required on Vercel. Set up a free Neon PostgreSQL database at neon.tech and add DATABASE_URL to your Vercel environment variables."
+    );
+  }
+  sequelize = new Sequelize(dbUrl, {
     dialect: "postgres",
     dialectOptions: {
       ssl: {
