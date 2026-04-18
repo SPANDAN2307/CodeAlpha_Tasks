@@ -62,31 +62,31 @@ function renderUI() {
   const featureSongs = masterSongs.filter(s => s.isFeature);
   const regularSongs = masterSongs.filter(s => !s.isFeature);
 
-  nanoGrid.innerHTML = featureSongs.map(song => \`
-    <div class="feature-card" data-id="\${song.id}">
-      <img src="\${song.cover}" alt="cover" class="feature-img" loading="lazy">
+  nanoGrid.innerHTML = featureSongs.map(song => `
+    <div class="feature-card" data-id="${song.id}">
+      <img src="${song.cover}" alt="cover" class="feature-img" loading="lazy">
       <div class="feature-info">
-        <div class="feature-subtitle">\${song.subtitle}</div>
-        <div class="feature-title">\${song.title}</div>
+        <div class="feature-subtitle">${song.subtitle}</div>
+        <div class="feature-title">${song.title}</div>
       </div>
     </div>
-  \`).join('');
+  `).join('');
 
-  newRelGrid.innerHTML = regularSongs.slice(0, 4).map(song => \`
-    <div class="album-card" data-id="\${song.id}">
-      <img class="album-cover" src="\${song.cover}" alt="cover" loading="lazy">
-      <div class="album-title">\${song.title}</div>
-      <div class="album-artist">\${song.artist}</div>
+  newRelGrid.innerHTML = regularSongs.slice(0, 4).map(song => `
+    <div class="album-card" data-id="${song.id}">
+      <img class="album-cover" src="${song.cover}" alt="cover" loading="lazy">
+      <div class="album-title">${song.title}</div>
+      <div class="album-artist">${song.artist}</div>
     </div>
-  \`).join('');
+  `).join('');
 
-  topGrid.innerHTML = regularSongs.slice(4).map(song => \`
-    <div class="album-card" data-id="\${song.id}">
-      <img class="album-cover" src="\${song.cover}" alt="cover" loading="lazy">
-      <div class="album-title">\${song.title}</div>
-      <div class="album-artist">\${song.artist}</div>
+  topGrid.innerHTML = regularSongs.slice(4).map(song => `
+    <div class="album-card" data-id="${song.id}">
+      <img class="album-cover" src="${song.cover}" alt="cover" loading="lazy">
+      <div class="album-title">${song.title}</div>
+      <div class="album-artist">${song.artist}</div>
     </div>
-  \`).join('');
+  `).join('');
 }
 
 // Logic
@@ -150,7 +150,7 @@ function formatTime(secs) {
   if(isNaN(secs) || secs < 0) return '0:00';
   const m = Math.floor(secs / 60);
   const s = Math.floor(secs % 60).toString().padStart(2, '0');
-  return \`\${m}:\${s}\`;
+  return `${m}:${s}`;
 }
 
 audio.addEventListener('timeupdate', () => {
