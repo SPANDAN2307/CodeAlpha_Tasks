@@ -1,5 +1,5 @@
 /* =========================================================
-   Harmony Music Dashboard — Apple Music Premium Theme
+   Bommbash Music Dashboard — Apple Music Premium Theme
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -331,7 +331,6 @@ input[type="range"]:hover::-webkit-slider-thumb { opacity: 1; transform: scale(1
 /* Album Card */
 .album-card {
   cursor: pointer;
-  group;
 }
 .album-cover {
   width: 100%; aspect-ratio: 1; border-radius: 8px; margin-bottom: 10px;

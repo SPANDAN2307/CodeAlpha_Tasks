@@ -1,5 +1,5 @@
 // =========================================================
-//  Harmony Dashboard Player — Apple Music style script.js
+//  Bommbash Dashboard Player — Apple Music style script.js
 // =========================================================
 
 // File paths to our AI-generated "Nano Banana" covers
