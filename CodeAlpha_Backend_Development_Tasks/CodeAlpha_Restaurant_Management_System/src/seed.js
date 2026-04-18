@@ -181,7 +181,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.7,
       ratingCount: 28,
-      imageUrl: "https://images.unsplash.com/photo-1666190094742-0df74bcad9c6?w=400&h=300&fit=crop",
+      imageUrl: null,
     },
     {
       name: "Kesari Rasmalai",
@@ -192,7 +192,7 @@ async function seedData() {
       preparationTime: 10,
       rating: 4.8,
       ratingCount: 20,
-      imageUrl: "https://images.unsplash.com/photo-1571006776337-df74994b5e0a?w=400&h=300&fit=crop",
+      imageUrl: null,
     },
     {
       name: "Brownie with Ice Cream",
@@ -216,7 +216,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.6,
       ratingCount: 22,
-      imageUrl: "https://images.unsplash.com/photo-1527585743534-7113e3648747?w=400&h=300&fit=crop",
+      imageUrl: null,
     },
     {
       name: "Masala Chai",
@@ -238,7 +238,7 @@ async function seedData() {
       preparationTime: 5,
       rating: 4.2,
       ratingCount: 12,
-      imageUrl: "https://images.unsplash.com/photo-1513558161293-cdaf765ed514?w=400&h=300&fit=crop",
+      imageUrl: null,
     },
     {
       name: "Cold Coffee",
