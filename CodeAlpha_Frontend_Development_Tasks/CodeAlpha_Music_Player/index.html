@@ -3,193 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A premium full-screen Spotify-like dashboard music player." />
-  <title>Harmony Music Dashboard</title>
+  <meta name="description" content="A premium desktop Apple Music-style dashboard." />
+  <title>Harmony Music - Desktop App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Using Inter to mimic SF Pro -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="dashboard-grid">
+  <div class="app-layout">
 
-    <!-- SIDEBAR -->
-    <nav class="sidebar">
-      <div class="sidebar-logo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/>
-          <line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
-        </svg>
-        <span>Harmony</span>
-      </div>
-
-      <div class="nav-section">
-        <a href="#" class="nav-item active">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-          Home
-        </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-          </svg>
-          Search
-        </a>
-        <a href="#" class="nav-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-          </svg>
-          Your Library
-        </a>
-      </div>
-
-      <div class="nav-section playlists">
-        <h3 class="section-title">Playlists</h3>
-        <ul class="playlist-list">
-          <li><a href="#">Focus Flow</a></li>
-          <li><a href="#">Deep Space Ambient</a></li>
-          <li><a href="#">Late Night Driving</a></li>
-          <li><a href="#">Summer Anthems</a></li>
-          <li><a href="#">Lo-Fi Chill</a></li>
-          <li><a href="#">Cyberpunk Synthwave</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- MAIN CONTENT -->
-    <main class="main-view" id="mainView">
-      <div class="header-bg" id="headerBg"></div>
-      
-      <!-- Top nav buttons -->
-      <header class="top-nav">
-        <div class="nav-arrows">
-          <button class="nav-arrow" disabled>&lt;</button>
-          <button class="nav-arrow" disabled>&gt;</button>
-        </div>
-        <div class="user-profile">
-          <img src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff&rounded=true" alt="Profile" />
-        </div>
-      </header>
-
-      <div class="content-scrollable">
-        <h1 class="greeting">Good Evening</h1>
-        
-        <!-- Grid of small recent cards -->
-        <div class="recent-grid" id="recentGrid">
-          <!-- Populated by JS -->
-        </div>
-
-        <!-- Section: Just for You -->
-        <section class="shelf">
-          <div class="shelf-header">
-            <h2>Made For You</h2>
-            <a href="#" class="show-all">Show all</a>
-          </div>
-          <div class="shelf-grid" id="madeForYouGrid">
-            <!-- Populated by JS -->
-          </div>
-        </section>
-
-        <!-- Section: Trending -->
-        <section class="shelf">
-          <div class="shelf-header">
-            <h2>Trending Now</h2>
-            <a href="#" class="show-all">Show all</a>
-          </div>
-          <div class="shelf-grid" id="trendingGrid">
-            <!-- Populated by JS -->
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <!-- BOTTOM PLAYER BAR -->
-    <footer class="player-bar">
-      
-      <!-- Left: Now Playing Info -->
-      <div class="now-playing">
-        <img class="np-cover" id="albumArt" src="../Music_Player/covers/neon_drift.png" alt="Cover" />
-        <div class="np-info">
-          <div class="np-title" id="trackTitle">Neon Drift</div>
-          <div class="np-artist" id="trackArtist">Luna Synthetic</div>
-        </div>
-        <button class="icon-btn heart-btn" id="heartBtn" aria-label="Like">
+    <!-- TOP PLAYER CONTROLS (APPLE MUSIC DESKTOP STYLE) -->
+    <header class="top-player-bar">
+      <!-- Playback Controls -->
+      <div class="playback-controls">
+        <button class="icon-btn" id="shuffleBtn" aria-label="Shuffle">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+            <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+            <line x1="4" y1="4" x2="9" y2="9"/>
           </svg>
         </button>
-      </div>
-
-      <!-- Center: Transport Controls & Progress -->
-      <div class="player-controls">
-        <div class="playback-buttons">
-          <button class="icon-btn sm" id="shuffleBtn" aria-label="Shuffle">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
-              <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
-              <line x1="4" y1="4" x2="9" y2="9"/>
-            </svg>
-          </button>
-          
-          <button class="icon-btn mid" id="prevBtn" aria-label="Previous">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
-            </svg>
-          </button>
-
-          <button class="play-pause-btn" id="playBtn" aria-label="Play/Pause">
-            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" id="playIcon">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" id="pauseIcon" style="display:none">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-          </button>
-
-          <button class="icon-btn mid" id="nextBtn" aria-label="Next">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M6 18l8.5-6L6 6v12zm2-8.14 5.52 3.64L8 17.14V9.86zM16 6h2v12h-2z"/>
-            </svg>
-          </button>
-
-          <button class="icon-btn sm" id="repeatBtn" aria-label="Repeat">
+        <button class="icon-btn prev-next" id="prevBtn" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+          </svg>
+        </button>
+        <button class="icon-btn play-btn" id="playBtn" aria-label="Play/Pause">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" id="playIcon">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" id="pauseIcon" style="display:none">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+        <button class="icon-btn prev-next" id="nextBtn" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 18l8.5-6L6 6v12zm2-8.14 5.52 3.64L8 17.14V9.86zM16 6h2v12h-2z"/>
+          </svg>
+        </button>
+        <button class="icon-btn" id="repeatBtn" aria-label="Repeat">
            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
               <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
             </svg>
-          </button>
-        </div>
-
-        <div class="playback-bar">
-          <span class="time-text" id="currentTime">0:00</span>
-          <div class="progress-bar-container" id="progressContainer">
-            <div class="progress-track">
-              <div class="progress-fill" id="progressFill"></div>
-              <div class="progress-thumb" id="progressThumb"></div>
-            </div>
-          </div>
-          <span class="time-text" id="trackDuration">0:00</span>
-        </div>
-      </div>
-
-      <!-- Right: Extra Controls & Volume -->
-      <div class="extra-controls">
-        <button class="icon-btn sm" aria-label="Lyrics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-        <button class="icon-btn sm" aria-label="Queue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></button>
-        <button class="icon-btn sm" id="muteBtn" aria-label="Mute">
-          <svg class="vol-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
-          </svg>
-          <svg class="vol-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
-          </svg>
         </button>
-        <div class="volume-slider-wrapper" style="width:90px; margin-right: 15px;">
-           <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+      </div>
+
+      <!-- LCD Display -->
+      <div class="lcd-display">
+        <div class="lcd-cover">
+          <img id="topCover" src="covers/neon_drift.png" alt="Cover" />
+        </div>
+        <div class="lcd-info">
+          <div class="lcd-text">
+            <div>
+              <span class="lcd-title" id="trackTitle">Nano Banana Pop</span>
+              <span class="lcd-artist divider"> — </span>
+              <span class="lcd-artist" id="trackArtist">AI Synthesizer</span>
+            </div>
+            <button class="icon-btn heart-btn sm" id="heartBtn" aria-label="Like">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="lcd-progress-bar">
+            <span class="time-text" id="currentTime">0:00</span>
+            <div class="progress-container" id="progressContainer">
+              <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+              </div>
+            </div>
+            <span class="time-text" id="trackDuration">0:00</span>
+          </div>
         </div>
       </div>
 
-    </footer>
+      <!-- Volume & User Actions -->
+      <div class="top-actions">
+        <div class="volume-control">
+          <button class="icon-btn sm" id="muteBtn" aria-label="Mute">
+            <svg class="vol-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            <svg class="vol-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+          </button>
+          <div class="volume-slider-wrapper">
+             <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+          </div>
+        </div>
+        <div class="user-profile">
+          <img src="https://ui-avatars.com/api/?name=MK&background=fa243c&color=fff&rounded=true" alt="Profile" />
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <div class="content-wrapper">
+      
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" class="search-icon" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" placeholder="Search" />
+        </div>
+
+        <nav class="nav-menu">
+          <div class="nav-group">
+            <a href="#" class="nav-item">Listen Now</a>
+            <a href="#" class="nav-item active">Browse</a>
+            <a href="#" class="nav-item">Radio</a>
+          </div>
+
+          <div class="nav-group">
+            <h3 class="nav-header">Library</h3>
+            <a href="#" class="nav-item">Recently Added</a>
+            <a href="#" class="nav-item">Artists</a>
+            <a href="#" class="nav-item">Albums</a>
+            <a href="#" class="nav-item">Songs</a>
+          </div>
+
+          <div class="nav-group">
+            <h3 class="nav-header">Playlists</h3>
+            <a href="#" class="nav-item">Nano Features</a>
+            <a href="#" class="nav-item">Synth Essentials</a>
+            <a href="#" class="nav-item">Lo-Fi Cafe</a>
+            <a href="#" class="nav-item">Chill Vibes</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <div class="scroll-container">
+          
+          <h1 class="page-title">Browse</h1>
+          <hr class="separator"/>
+
+          <!-- Nano Banana Features -->
+          <section class="shelf">
+            <div class="shelf-header">
+              <h2>Nano Innovations Showcase</h2>
+              <button class="see-all">See All</button>
+            </div>
+            <div class="grid feature-grid" id="nanoGrid">
+              <!-- JS Populated -->
+            </div>
+          </section>
+
+          <!-- New Releases -->
+          <section class="shelf">
+            <div class="shelf-header">
+              <h2>New Releases</h2>
+              <button class="see-all">See All</button>
+            </div>
+            <div class="grid row-grid" id="newRelGrid">
+              <!-- JS Populated -->
+            </div>
+          </section>
+          
+          <!-- Top Albums -->
+          <section class="shelf">
+            <div class="shelf-header">
+              <h2>Top Albums</h2>
+              <button class="see-all">See All</button>
+            </div>
+            <div class="grid row-grid" id="topGrid">
+              <!-- JS Populated -->
+            </div>
+          </section>
+          
+        </div>
+      </main>
+    </div>
 
   </div>
 
