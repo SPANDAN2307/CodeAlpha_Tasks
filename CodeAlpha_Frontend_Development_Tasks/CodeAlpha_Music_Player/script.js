@@ -209,7 +209,15 @@ heartBtn.addEventListener('click', () => {
 // Click event delegation for cards
 document.querySelector('.main-content').addEventListener('click', e => {
   const card = e.target.closest('.feature-card, .album-card');
-  if (card) loadSongById(card.dataset.id);
+  if (card) {
+    const songId = parseInt(card.dataset.id);
+    if (currentQueue[currentTrackIndex] && currentQueue[currentTrackIndex].id === songId) {
+      // Toggle play/pause if user clicks the currently active card
+      togglePlay();
+    } else {
+      loadSongById(songId);
+    }
+  }
 });
 
 // Init
