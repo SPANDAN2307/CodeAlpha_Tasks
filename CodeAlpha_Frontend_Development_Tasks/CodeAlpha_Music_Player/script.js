@@ -2,13 +2,12 @@
 //  Bommbash Dashboard Player — Apple Music style script.js
 // =========================================================
 
-// File paths to our AI-generated "Nano Banana" covers
-const bananaPop = 'file:///C:/Users/Spandan/.gemini/antigravity/brain/3491601c-6b2b-4654-8e0b-24d7da146d16/cover_banana_pop_1776552305113.png';
-const bananaNano = 'file:///C:/Users/Spandan/.gemini/antigravity/brain/3491601c-6b2b-4654-8e0b-24d7da146d16/cover_nano_banana_1776552321854.png';
-const bananaVintage = 'file:///C:/Users/Spandan/.gemini/antigravity/brain/3491601c-6b2b-4654-8e0b-24d7da146d16/cover_vintage_banana_1776552338870.png';
+// File paths for our web-ready feature covers (Ensures GitHub Pages compatibility)
+const bananaPop = 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?auto=format&fit=crop&w=400&q=80';
+const bananaNano = 'https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=400&q=80';
+const bananaVintage = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80';
 
-// Fallbacks are our local covers in case the absolute C: path is blocked by the browser.
-// Note: If images don't load, copy them to your project folder!
+// Live URLs ensure zero broken images when hosting on the web!
 
 const masterSongs = [
   { id: 0, title: 'Nano Groove', artist: 'Banana Pop Syndicate', cover: bananaPop, src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', liked: false, isFeature: true, subtitle: 'NEW RELEASE' },
