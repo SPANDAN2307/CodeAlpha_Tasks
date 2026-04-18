@@ -11,18 +11,18 @@ const bananaVintage = 'file:///C:/Users/Spandan/.gemini/antigravity/brain/349160
 // Note: If images don't load, copy them to your project folder!
 
 const masterSongs = [
-  { id: 0, title: 'Nano Groove', artist: 'Banana Pop Syndicate', cover: bananaPop, src: 'https://ccmixter.org/content/admiralbob99/admiralbob99_-_007_Bond_Style.mp3', liked: false, isFeature: true, subtitle: 'NEW RELEASE' },
-  { id: 1, title: 'Robo Peel', artist: 'Nano Banana', cover: bananaNano, src: 'https://ccmixter.org/content/nickleus/nickleus_-_my_lighthouse.mp3', liked: false, isFeature: true, subtitle: 'EXCLUSIVE' },
-  { id: 2, title: 'Vintage Split', artist: 'Synthwave Fruit', cover: bananaVintage, src: 'https://ccmixter.org/content/debbyz/debbyz_-_Golden_Hour.mp3', liked: false, isFeature: true, subtitle: 'CURATED' },
+  { id: 0, title: 'Nano Groove', artist: 'Banana Pop Syndicate', cover: bananaPop, src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3', liked: false, isFeature: true, subtitle: 'NEW RELEASE' },
+  { id: 1, title: 'Robo Peel', artist: 'Nano Banana', cover: bananaNano, src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', liked: false, isFeature: true, subtitle: 'EXCLUSIVE' },
+  { id: 2, title: 'Vintage Split', artist: 'Synthwave Fruit', cover: bananaVintage, src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', liked: false, isFeature: true, subtitle: 'CURATED' },
   
   // Standard Albums
-  { id: 3, title: 'Rainy Café', artist: 'Mellow Keys', cover: '../Music_Player/covers/rainy_cafe.png', src: 'https://ccmixter.org/content/texasradiofish/texasradiofish_-_Deep_in_the_Rain.mp3', liked: false, isFeature: false },
-  { id: 4, title: 'Summer Wave', artist: 'Coastal Beats', cover: '../Music_Player/covers/summer_wave.png', src: 'https://ccmixter.org/content/Javolenus/Javolenus_-_Latitude_0.mp3', liked: false, isFeature: false },
-  { id: 5, title: 'Deep Space', artist: 'Orbital Drift', cover: '../Music_Player/covers/deep_space.png', src: 'https://ccmixter.org/content/Scomber/Scomber_-_Surrounded_By_Space.mp3', liked: false, isFeature: false },
-  { id: 6, title: 'Neon Dreams', artist: 'Luna Synthetic', cover: '../Music_Player/covers/neon_drift.png', src: 'https://ccmixter.org/content/TheDICE/TheDICE_-_Back_To_Tomorrow.mp3', liked: false, isFeature: false },
-  { id: 7, title: 'Acoustic Sunrise', artist: 'Woodlands', cover: '../Music_Player/covers/golden_hour.png', src: 'https://ccmixter.org/content/robwalkerpoet/robwalkerpoet_-_A_New_Day_1.mp3', liked: false, isFeature: false },
-  { id: 8, title: 'Ocean Breeze', artist: 'Islanders', cover: '../Music_Player/covers/summer_wave.png', src: 'https://ccmixter.org/content/Apoxode/Apoxode_-_Ocean_Lights.mp3', liked: false, isFeature: false },
-  { id: 9, title: 'Jazz Lounge', artist: 'The Cats', cover: '../Music_Player/covers/rainy_cafe.png', src: 'https://ccmixter.org/content/jlbrock44/jlbrock44_-_Urbana-Metronica_(wooh-yeah_mix).mp3', liked: false, isFeature: false }
+  { id: 3, title: 'Rainy Café', artist: 'Mellow Keys', cover: 'https://picsum.photos/id/11/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3', liked: false, isFeature: false },
+  { id: 4, title: 'Summer Wave', artist: 'Coastal Beats', cover: 'https://picsum.photos/id/16/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', liked: false, isFeature: false },
+  { id: 5, title: 'Deep Space', artist: 'Orbital Drift', cover: 'https://picsum.photos/id/29/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3', liked: false, isFeature: false },
+  { id: 6, title: 'Neon Dreams', artist: 'Luna Synthetic', cover: 'https://picsum.photos/id/36/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3', liked: false, isFeature: false },
+  { id: 7, title: 'Acoustic Sunrise', artist: 'Woodlands', cover: 'https://picsum.photos/id/42/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3', liked: false, isFeature: false },
+  { id: 8, title: 'Ocean Breeze', artist: 'Islanders', cover: 'https://picsum.photos/id/49/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3', liked: false, isFeature: false },
+  { id: 9, title: 'Jazz Lounge', artist: 'The Cats', cover: 'https://picsum.photos/id/55/400/400', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3', liked: false, isFeature: false }
 ];
 
 let currentQueue = [...masterSongs];
