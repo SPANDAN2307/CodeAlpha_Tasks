@@ -1,57 +1,43 @@
-# Event Registration System
+# 🎫 Event Registration System
+> **CodeAlpha Backend Development — Task 1**
 
-A full-stack application built with Express.js, Sequelize, React, and Tailwind CSS. The app features a modern UI with glassmorphism and provides a robust registration system with role-based authentication.
+A robust, full-stack application built rapidly with Express.js, Sequelize, React, and Tailwind CSS. The node infrastructure isolates a heavily encrypted role-based security array supporting a glassmorphic modern UI interface natively.
 
-## Features
+---
 
-- **Role-Based Authentication**: Secure login and registration using JWT and bcrypt.
-- **Admin Dashboard**: Only administrators can create and manage events.
-- **User Dashboard**: Users can browse events, register for them, and manage their tickets.
-- **Dynamic UI**: Modern, responsive frontend built with React and styled with Tailwind CSS.
+## 🌟 Overview
+Constructed strictly to showcase highly isolated node integrations handling relational table schema routing across an advanced React front environment, ensuring zero leakage of authorized data variables across user permissions.
 
-## Getting Started Locally
+## ✨ Highlighted Features
+* **Role-Based Encrypted Authorization:** Secure login protocols routing hash verification using bcrypt and generating specialized JWT tracking tickets.
+* **Restricted Domain Dashboards:** Admin-only architectural components providing event creation arrays not observable to strict User environments.
+* **Direct Event Mapping Algorithms:** Immediate event selection processing natively linking users to precise ticket identification blocks.
 
-### The Easy Way (Windows only)
-For a seamless startup experience on Windows, simply run the included batch script. It will automatically check for dependencies, install them if necessary, and launch both the backend and frontend servers:
-1. Double-click on `run.bat` or run it from the command line:
-   ```cmd
-   run.bat
-   ```
+## 🛠️ Technology Stack
+| Technology | Architecture Concept |
+|----------|-------------------|
+| Frontend Routing | React (JSX), Tailwind CSS |
+| Backend Structure | Node.js, Express.js |
+| Data Integration | Sequelize ORM |
+| Database | SQLite Embedded File Management |
 
-### Manual Setup
-1. **Install dependencies:**
-   In the root directory, run:
-   ```bash
-   npm run install-all
-   ```
+## 🚀 Quick Start Setup (Local Environment)
+### The 1-Click Zero-Touch Setup (Windows)
+For a seamless, rapid startup phase on Windows environments bypassing CLI interaction heavily:
+1. Trigger the explicit `run.bat` extraction script mechanically using File Explorer.
 
-2. **Seed the database (Optional but recommended):**
-   Run the seed script to populate events to test the app.
-   ```bash
-   cd backend
-   node seed.js
-   cd ..
-   ```
+### The Manual Initialization Structure
+If building or analyzing structure piece by piece:
+```bash
+# 1. Trigger dual-installation routing array
+npm run install-all
 
-3. **Start the development server:**
-   In the root directory, run:
-   ```bash
-   npm run dev
-   ```
-   - The React frontend will start on port `5173`.
-   - The Express backend will start on port `5000`.
+# 2. Extract testing blocks (Optional)
+cd backend && node seed.js && cd ..
 
-## Deployment to Render
+# 3. Fire Server Parameters mapping port 5173/5000 simultaneously
+npm run dev
+```
 
-This project is configured to be deployed as a **Single Web Service** on Render.
-
-1. Connect this repository to your Render account.
-2. Select **Web Service** and choose this repository.
-3. The `render.yaml` file in the root directory will automatically configure the build and start commands.
-   - Build Command: `npm run install-all && npm run build:frontend`
-   - Start Command: `npm start`
-4. Deploy! Render will build the React app and serve it from the Express backend automatically.
-
-### Production Database
-By default, the app uses an SQLite database locally. To use PostgreSQL on Render, add an environment variable in the Render dashboard:
-- `DATABASE_URL`: Add your PostgreSQL connection string here. The app will automatically connect using Postgres.
+## 🔌 API Reference & Deployment Architecture
+Designed exclusively natively as a **Single Web Service** utilizing cross compatible parameters against platforms like Render natively referencing the `.yaml` routing nodes explicitly providing auto CI-CD delivery integration securely.
