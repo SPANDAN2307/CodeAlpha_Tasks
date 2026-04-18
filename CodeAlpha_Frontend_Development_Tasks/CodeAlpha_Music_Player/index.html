@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A premium music player with playlist, autoplay, progress bar, and volume control." />
+  <title>Harmony — Music Player</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg-blob blob-1" id="blob1"></div>
+  <div class="bg-blob blob-2" id="blob2"></div>
+  <div class="bg-blob blob-3" id="blob3"></div>
+
+  <div class="app-wrapper">
+
+    <!-- SIDEBAR PLAYLIST -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2 class="sidebar-title">Your Library</h2>
+        <span class="track-count" id="trackCount">5 songs</span>
+      </div>
+      <ul class="playlist" id="playlist" role="list" aria-label="Song playlist">
+        <!-- Populated by JS -->
+      </ul>
+    </aside>
+
+    <!-- MAIN PLAYER -->
+    <main class="player-card" id="playerCard">
+
+      <!-- Top bar -->
+      <div class="player-topbar">
+        <button class="icon-btn" id="togglePlaylist" aria-label="Toggle playlist" title="Library">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+        </button>
+        <span class="now-playing-label">Now Playing</span>
+        <button class="icon-btn" id="shuffleBtn" aria-label="Toggle shuffle" title="Shuffle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+            <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+            <line x1="4" y1="4" x2="9" y2="9"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Album Art -->
+      <div class="album-art-wrapper" id="albumArtWrapper">
+        <div class="album-art-shadow"></div>
+        <img class="album-art" id="albumArt" src="" alt="Album cover" draggable="false" />
+      </div>
+
+      <!-- Track Info -->
+      <div class="track-info">
+        <div class="track-title-row">
+          <h1 class="track-title" id="trackTitle">Neon Drift</h1>
+          <button class="icon-btn heart-btn" id="heartBtn" aria-label="Like song">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </button>
+        </div>
+        <p class="track-artist" id="trackArtist">Luna Synthetic</p>
+        <p class="track-album" id="trackAlbum">Neon Dreams</p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-section">
+        <div class="progress-container" id="progressContainer" role="slider" aria-label="Song progress" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-thumb" id="progressThumb"></div>
+          </div>
+        </div>
+        <div class="time-display">
+          <span class="time current" id="currentTime">0:00</span>
+          <span class="time duration" id="trackDuration">0:00</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button class="ctrl-btn secondary" id="prevBtn" aria-label="Previous track">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/>
+          </svg>
+        </button>
+
+        <button class="ctrl-btn play-btn" id="playBtn" aria-label="Play or pause">
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" id="playIcon">
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+          <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" id="pauseIcon" style="display:none">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        </button>
+
+        <button class="ctrl-btn secondary" id="nextBtn" aria-label="Next track">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M6 18l8.5-6L6 6v12zm2-8.14 5.52 3.64L8 17.14V9.86zM16 6h2v12h-2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Volume & Repeat -->
+      <div class="bottom-controls">
+        <button class="icon-btn" id="repeatBtn" aria-label="Toggle repeat" title="Repeat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+            <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+          </svg>
+        </button>
+
+        <div class="volume-control">
+          <button class="icon-btn volume-icon-btn" id="muteBtn" aria-label="Mute or unmute">
+            <svg class="vol-high" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+            </svg>
+            <svg class="vol-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+            </svg>
+          </button>
+          <div class="volume-slider-wrapper">
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume" />
+          </div>
+        </div>
+
+        <button class="icon-btn" id="moreBtn" aria-label="More options" title="More">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>
+          </svg>
+        </button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Hidden audio element -->
+  <audio id="audioPlayer" preload="metadata"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
